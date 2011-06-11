@@ -1,0 +1,11 @@
+<%= render :partial => "comments/user" %>
+
+<div class="comment_form">
+  <%- form_for @comment, :remote => true do |f| -%>
+    <%= f.hidden_field :commit_sha %>
+    <%= f.hidden_field :block %>
+    <%= f.hidden_field :line %>
+    <%= f.text_area :opinion, :class => "text_area" %>
+    <%= f.submit "Send", :class => "submit"%>
+  <%- end %>
+</div>

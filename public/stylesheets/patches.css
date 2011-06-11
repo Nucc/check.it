@@ -1,0 +1,151 @@
+
+div.patch
+{
+  width: 900px;
+  margin: auto;
+  margin-top: 40px;
+  border: 1px solid #DDD;
+}
+
+div.patch .filename
+{
+  padding: 10px;
+  font-family: "Lucida grande", "Trebuchet MS";
+  font-size: 16px;
+  background-color: #F4F4F4;
+  border-bottom: 1px solid #BBB;
+}
+
+div.patches
+{
+  margin-bottom: 30px;
+}
+
+div.patches div.day
+{
+  font-size: 16px;
+  font-family: "Lucida grande", "Trebuchet MS";
+  font-weight: bold;
+}
+
+table.diff
+{
+  background-color: #F4F4F4;
+  border-spacing: 0px;
+}
+
+td
+{
+  padding: 2px;
+}
+
+tr.minus
+{
+  background-color: #FA8484;
+}
+
+tr.plus
+{
+  background-color: #B8FCC1;
+}
+
+tr.commented td
+{
+  border-bottom: 3px solid red;
+}
+
+tr.info
+{
+  background-color: #FFF;
+}
+
+tr.head
+{
+  background-color: #DDD;
+}
+
+td.none
+{
+  border: 0px;
+}
+
+td.number
+{
+  background-color: #DDD;
+  color: #888;
+  text-align: right;
+  padding-right: 4px;
+  border-left: 1px solid #CCC;
+  border-top: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+}
+
+td.number a
+{
+  color: #888;
+}
+
+td.line
+{
+  width: 100%;
+}
+
+.tags
+{
+  background-color: yellow;
+  padding: 3px;
+  border: 1px solid #444;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+div.commit
+{
+  position: relative;
+  width: 880px;
+  margin: auto;
+  background-color: #F0F3F7;
+  padding: 10px;
+  border: 1px solid #BEDCE7;
+  padding-bottom: 25px;
+}
+
+
+div.commit div.description
+{
+  width: 500px;
+  float: left;
+}
+
+div.commit div.description div.message
+{
+  padding-bottom: 20px;
+}
+
+div.commit div.description div.profile_image
+{
+  float: left;
+  margin-right: 15px;
+  height: 48px;
+  border: 1px solid #CCC;
+}
+
+div.commit div.description div.comments
+{
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+
+div.commit div.info
+{
+  color: #777;
+  font-size: 11px;
+  float: right;
+}
+
+div.commit div.info a
+{
+  color: #777;
+}

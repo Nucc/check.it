@@ -1,0 +1,13 @@
+<%- @days.each do |day| %>
+<div class="patches">
+  <div class="day">
+    <%= day.day.strftime("%Y-%m-%d") %>
+  </div>
+
+  <div class="parts">
+    <%- day.patches.each do |patch|%>
+      <%= render :partial => "patch", :object => patch %>
+    <%- end %>
+  </div>
+</div>
+<%- end %>

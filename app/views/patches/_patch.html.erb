@@ -1,0 +1,45 @@
+<%- show_long_message ||= false %>
+
+<div class="commit">
+  <div class="description">
+    <%- if show_long_message %>
+      <div class="message"><%= change_endlines(patch.message) %></div>
+    <%- else %>
+      <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), patch %></div>
+    <%- end %>
+    
+    <div class="profile_image"><%= image_tag "anonymous.jpg" %></div>
+    <div class="author"><%= patch.author.name %> &lt;<%= patch.author.email %>&gt; (author)</div>
+    
+    <div class="date"><%= format_date(patch.date) %></div>
+    <%- if patch.comments.length > 0 %>
+    <div class="comments"><%= pluralize(patch.comments.length, "comment") %></div>
+    <%- end %>
+  </div>
+  
+  <div class="info">
+    <div class="sha">
+      Commit <span><%= link_to patch.sha, patch %></span>
+    </div>
+    <div class="parent">
+      Parent <span><%= link_to patch.parent.sha, patch.parent %></span>
+    </div>
+
+    <div class="tree">
+      Tree &nbsp;&nbsp;<span><%= patch.gtree.sha %></span>
+    </div>      
+  </div>
+  
+  
+  <%- if patch.tags.size > 0 -%>
+  <span class="tags">
+    <%- patch.tags.each do |tag| %>
+      <%= tag.name %>
+    <%- end %>
+  </span>
+  <%- end -%>
+
+  
+  <div style="clear: both"></div>
+  
+</div>

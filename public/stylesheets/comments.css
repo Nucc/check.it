@@ -1,0 +1,105 @@
+div.comment_form
+{
+  background-color: #FFFFFF;
+}
+
+tr.comment
+{
+  background-color: #FFFFFF;
+}
+
+div.comments div.comment
+{
+  background-color: #FFFFDD;
+  border: 1px solid #EEE;
+  width: 500px;
+  padding: 5px;
+  margin: 5px;
+  float: left;
+  min-height: 24px;
+}
+
+div.user
+{
+  width: 150px;
+  background-color: #FFFFDD;
+  border: 1px solid #EEE;
+  padding: 5px;
+  margin: 5px;
+  float: left;
+}
+
+div.user div.name
+{
+  padding-left: 30px;
+  vertical-align: middle;
+}
+
+div.comments
+{
+}
+
+div.user div.profile_image
+{
+  height: 24px;
+  width: 24px;
+  float: left;
+}
+
+div.user div.profile_image img
+{
+  height: 24px;
+  width: 24px;
+}
+
+tr.info td
+{
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+
+div.comment_form .text_area
+{
+  height: 24px;
+  width: 500px;
+  margin: 5px;
+  padding: 5px;
+  float: left;
+}
+
+div.comment_form .text_area.active
+{
+  height: 80px;
+}
+
+
+div.comment_form .submit
+{
+  float: left;
+  
+  height: 36px;
+  background: #eeeeee;
+  border: 1px solid #dddddd;
+  
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 10px 3px 10px;
+  margin: 5px;
+  
+  line-height: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #333333;
+  cursor: pointer;
+  font-family: verdana;
+}
+
+div.comment_form .submit:hover, button:hover
+{ 
+  background: #2b86c8;
+  text-shadow: 1px 0px 0 white;
+  color: white;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+

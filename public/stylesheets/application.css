@@ -1,0 +1,14 @@
+body {
+  font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
+  font-size: 12px;
+  background-color: #CCC;
+}
+
+div.mainpage
+{
+  width: 900px;
+  background: #FFF;
+  border: 1px solid #AAA;
+  padding: 20px;
+  margin: auto;
+}
