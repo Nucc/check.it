@@ -53,10 +53,10 @@ class CommentsController < ApplicationController
     
     @comment = Comment.new(params[:comment])
     @comment.commit = @commit
+    @comment.user = current_user
 
     respond_to do |wants|
       if @comment.save
-        flash[:notice] = 'Comment was successfully created.'
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
         wants.xml  { render :xml => @comment, :status => :created, :location => @comment }
@@ -72,7 +72,6 @@ class CommentsController < ApplicationController
   def update
     respond_to do |wants|
       if @comment.update_attributes(params[:comment])
-        flash[:notice] = 'Comment was successfully updated.'
         wants.html { redirect_to(@comment) }
         wants.xml  { head :ok }
       else

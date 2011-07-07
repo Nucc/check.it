@@ -1,4 +1,4 @@
-<%= render :partial => "comments/user" %>
+<%= render :partial => "comments/user", :object => current_user %>
 
 <div class="comment_form">
   <%- form_for @comment, :remote => true do |f| -%>

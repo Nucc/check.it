@@ -12,3 +12,16 @@ div.mainpage
   padding: 20px;
   margin: auto;
 }
+
+p.notice,
+p.alert
+{
+  width: 900px;
+  background: #B3002C;
+  border: 1px solid #AAA;
+  padding: 20px;
+  margin: auto;
+  color: #FFF;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

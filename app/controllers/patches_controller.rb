@@ -1,5 +1,7 @@
 class PatchesController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def index
     @days = Patch.by_day
   end
