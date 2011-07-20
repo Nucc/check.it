@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module PatchesHelper
 
   def parse (plain_diff)
@@ -67,9 +69,7 @@ module PatchesHelper
     
     comments.each do |comment|
       if comment.line == line and comment.block == block
-        
         actual_comments << comment
-        #comments.delete_at(i)
       end
       i += 1
     end
@@ -91,5 +91,10 @@ module PatchesHelper
       dates[i]  << patch
     end
     return dates
+  end
+  
+  def avatar(email)
+    email.downcase!
+    "http://gravatar.com/avatar/" + Digest::MD5.hexdigest(email)
   end
 end

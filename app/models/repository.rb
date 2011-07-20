@@ -10,12 +10,19 @@ class Repository
     @grit_object = Grit::Repo.new(url)
   end
   
+  def branch
+    "master"
+  end
+  
+  def name
+    "Have 2 do it!"
+  end
+  
   def patches(number = 30, index = 0)
     temp = []
     # using commits_since because I didn't find better solution
     # to iterate over the commits
-    @grit_object.commits("master", number, index).each do |commit|
-      p commit
+    @grit_object.commits(branch, number, index).each do |commit|
       temp << Patch.new(commit)
     end
     return temp
@@ -23,5 +30,9 @@ class Repository
   
   def patch(id)
     Patch.new( @grit_object.commit(id) )
+  end
+  
+  def count
+    @grit_object.commit_count(branch)
   end
 end

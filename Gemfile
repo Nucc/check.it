@@ -4,13 +4,13 @@ gem 'mysql2', "0.2.7"
 
 gem 'rails', '3.0.6'
 
-gem 'grit'
+gem 'grit', '2.4.0'
 
 gem "jquery-rails"
 
 gem 'devise'
 
-
+gem 'paginator'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

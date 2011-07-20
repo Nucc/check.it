@@ -1,18 +1,23 @@
 <%- show_long_message ||= false %>
 
 <div class="commit">
-  <div class="description">
-    <%- if show_long_message %>
-      <div class="message"><%= change_endlines(patch.message) %></div>
-    <%- else %>
-      <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), patch %></div>
-    <%- end %>
-    
-    <div class="profile_image"><%= image_tag "anonymous.jpg" %></div>
+  <div class="description"> 
+    <div class="profile_image"><%= image_tag avatar(patch.author_email) %></div>
 
-    <div class="author"><%= patch.author %>&gt; (author)</div>
+    <div class="author">
+      <strong><%= patch.author_name %></strong> &lt;<%= patch.author_email%>&gt;
+    </div>
     
     <div class="date"><%= format_date(patch.date) %></div>
+  
+    <div class="message">
+     <%- if show_long_message %>
+        <div class="message"><%= change_endlines(patch.message) %></div>
+      <%- else %>
+        <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), patch %></div>
+      <%- end %>
+    </div>
+  
     <%- if patch.comments.length > 0 %>
     <div class="comments"><%= pluralize(patch.comments.length, "comment") %></div>
     <%- end %>
@@ -34,7 +39,6 @@
     </div>      
   </div>
   
-  
   <%- if patch.tags.size > 0 -%>
   <span class="tags">
     <%- patch.tags.each do |tag| %>
@@ -42,8 +46,5 @@
     <%- end %>
   </span>
   <%- end -%>
-
-  
   <div style="clear: both"></div>
-  
 </div>

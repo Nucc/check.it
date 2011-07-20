@@ -1,3 +1,9 @@
+<div class="header">
+  <div class="image"><%= image_tag "nerd_guy.png"%></div>
+  <div class="title"><%= @repository.name %></div>
+  <div class="clear"></div>
+</div>
+
 <%- by_day(@patches).each do |day| %>
 <div class="patches">
   <div class="day">
@@ -11,3 +17,7 @@
   </div>
 </div>
 <%- end %>
+
+<%= @patches.number %>
+<%= link_to("Prev", patches_url(:page => @patches.prev.number)) if @patches.prev? %>
+<%= link_to("Next", patches_url(:page => @patches.next.number)) if @patches.next? %>

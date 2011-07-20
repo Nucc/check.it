@@ -1,4 +1,3 @@
-
 div.patch
 {
   width: 900px;
@@ -120,15 +119,19 @@ div.commit div.description
 
 div.commit div.description div.message
 {
-  padding-bottom: 20px;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  clear: both;
+  font-size: 13px;
 }
 
-div.commit div.description div.profile_image
+div.commit div.description div.profile_image img
 {
   float: left;
   margin-right: 15px;
   height: 48px;
   border: 1px solid #CCC;
+  display: block;
 }
 
 div.commit div.description div.comments
@@ -148,4 +151,25 @@ div.commit div.info
 div.commit div.info a
 {
   color: #777;
+}
+
+div.header .image img
+{
+  float: left;
+  height: 60px;
+}
+
+div.header .title
+{
+  padding-top: 10px;
+  padding-left: 30px;
+  color: #333;
+  float: left;
+  font-size: 32px;
+  font-weight: bold;  
+}
+
+div.header
+{
+  margin-bottom: 30px;
 }
