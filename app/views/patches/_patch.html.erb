@@ -9,7 +9,8 @@
     <%- end %>
     
     <div class="profile_image"><%= image_tag "anonymous.jpg" %></div>
-    <div class="author"><%= patch.author.name %> &lt;<%= patch.author.email %>&gt; (author)</div>
+
+    <div class="author"><%= patch.author %>&gt; (author)</div>
     
     <div class="date"><%= format_date(patch.date) %></div>
     <%- if patch.comments.length > 0 %>
@@ -22,11 +23,14 @@
       Commit <span><%= link_to patch.sha, patch %></span>
     </div>
     <div class="parent">
-      Parent <span><%= link_to patch.parent.sha, patch.parent %></span>
+      <%- begin %>
+      Parent <span><%= link_to patch.parent, patch.parent %></span>
+      <%- rescue NoPatch => e %>
+      <%- end %>
     </div>
 
     <div class="tree">
-      Tree &nbsp;&nbsp;<span><%= patch.gtree.sha %></span>
+      Tree &nbsp;&nbsp;<span><%= patch.tree %></span>
     </div>      
   </div>
   
@@ -34,7 +38,7 @@
   <%- if patch.tags.size > 0 -%>
   <span class="tags">
     <%- patch.tags.each do |tag| %>
-      <%= tag.name %>
+      <span class="tag"><%= tag %></span>
     <%- end %>
   </span>
   <%- end -%>

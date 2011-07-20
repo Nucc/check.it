@@ -1,4 +1,4 @@
-<%- @days.each do |day| %>
+<%- by_day(@patches).each do |day| %>
 <div class="patches">
   <div class="day">
     <%= day.day.strftime("%Y-%m-%d") %>

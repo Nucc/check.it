@@ -75,4 +75,21 @@ module PatchesHelper
     end
     return actual_comments
   end
+  
+  def by_day(all)
+    dates = []
+    last_day = nil
+    i = -1
+
+    all.each do |patch|
+      c = patch.date.strftime("%Y%m%d")
+      if (c != last_day)
+        i += 1
+        last_day = c
+      end
+      dates[i] ||= Review::Day.new(patch.date)
+      dates[i]  << patch
+    end
+    return dates
+  end
 end

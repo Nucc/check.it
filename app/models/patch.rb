@@ -1,4 +1,4 @@
-require 'git'
+require 'grit'
 
 module Review
   class Day
@@ -17,10 +17,119 @@ module Review
   
 end  
 
+class NoPatch < Exception
+end
+
+class Patch
+  
+  include ActiveModel::AttributeMethods
+  extend  ActiveModel::Naming
+  
+  attr :author
+  attr :sha
+  attr :date
+  attr :message
+  attr :parent
+  attr :tree
+  attr :tags
+  
+  # Currently we use Grit for git representation.
+  # Later if we change to other git ruby edition, 
+  # we should modify only this class
+  # +patch = Grit patch
+  def initialize(patch)
+    @etalon = patch
+  end
+  
+  
+  #
+  # Getter methods
+  #  
+  # Returns the sha identifier of the commit
+  def sha
+    @etalon.sha
+  end
+  
+  def author
+    "%s <%s>" % [@etalon.author.name, @etalon.author.email]
+  end
+  
+  def date
+    @etalon.authored_date
+  end
+   
+  def message
+    @etalon.message
+  end
+  
+  def parent
+    return Patch.new(@etalon.parents[0]) unless @etalon.parents[0].nil?
+    raise NoPatch
+  end
+  
+  def tree
+    @etalon.tree.id
+  end
+  
+  def tags
+    tags = []
+    @etalon.repo.tags.each do |tag|
+      p tag.commit.id
+      p @etalon.id
+      p "=="
+      tags << tag.name if tag.commit.id == @etalon.id
+    end
+    tags
+  end
+  
+  def comments
+    commit = Commit.find_by_sha(sha)
+    comments = []
+    comments = commit.comments if commit
+    return comments
+  end
+  
+  def diff
+    diff = String.new
+    
+    @etalon.repo.diff(sha, parent.sha).each do |d|
+      diff += d.diff + "\n"
+    end
+    
+    blocks = []
+    
+    block  = Block.new
+    block.number = blocks.length
+    diff.lines.each do |line|
+      if block.parse(line)
+        next
+      else
+        blocks << block
+        block = Block.new
+        block.number = blocks.length
+      end
+    end
+    blocks << block
+    return blocks
+  end
+  
+  #
+  # Representations
+  #
+  def to_s
+    sha
+  end
+  
+  
+  
+end
+
+
+=begin
 class Patch 
   
   include ActiveModel::AttributeMethods
-  extend ActiveModel::Naming
+  extend  ActiveModel::Naming
   
   def initialize(patch)
     if patch.respond_to?(:String)
@@ -31,19 +140,19 @@ class Patch
   end
     
   def self.working_area
-    working_area ||= Git.open("/Users/developer/Desktop/have2do.it")
+    working_area ||= Grit::Repo.new("/Users/developer/Desktop/have2do.it")
   end
   
   def self.all
     patches = []
-    working_area.log.each do |log|
+    working_area.commits.each do |log|
       patches << Patch.new(log)
     end
     return patches
   end  
   
   def self.find(id)
-    Patch.new( working_area.gcommit(id) )
+    #Patch.new( Grit::Commit::find_all(working_area, id) )
   end
 
   def self.by_day
@@ -65,11 +174,16 @@ class Patch
   end
 
   def to_s
-    @patch.sha
+    @patch.id
+  end
+
+  def message
+    @patch.to_s
+    #@patch.messages.join("\n")
   end
 
   def parent
-    Patch.new(@patch.parent)
+    Patch.new(@patch.parents[0])
   end
 
   def tags
@@ -77,7 +191,7 @@ class Patch
     
     @tags = []
     Patch.working_area.tags.each do |tag|
-      @tags << tag if tag.sha == @patch.sha
+      @tags << tag if tag.id == @patch.sha
     end
     return @tags
   end
@@ -115,3 +229,4 @@ class Patch
   end
   
 end
+=end
