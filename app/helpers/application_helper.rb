@@ -15,4 +15,8 @@ module ApplicationHelper
     end
   end
 
+  def format_patch(patch)
+    link_to(patch, repository_branch_patch_url(patch.repository, patch.repository.branch, patch))
+  end
+
 end

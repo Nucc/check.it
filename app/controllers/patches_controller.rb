@@ -3,7 +3,7 @@ class PatchesController < ApplicationController
   before_filter :authenticate_user!
 
   def repository
-    Repository.new("/Users/developer/Desktop/have2do.it")
+    @repository ||= Repository.new("/Users/developer/Desktop/#{params[:repository_id]}", params[:branch_id].to_s)
   end
 
   def index

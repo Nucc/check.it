@@ -14,7 +14,7 @@
      <%- if show_long_message %>
         <div class="message"><%= change_endlines(patch.message) %></div>
       <%- else %>
-        <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), patch %></div>
+        <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), repository_branch_patch_url(patch.repository, patch.repository.branch, patch) %></div>
       <%- end %>
     </div>
   
@@ -25,11 +25,11 @@
   
   <div class="info">
     <div class="sha">
-      Commit <span><%= link_to patch.sha, patch %></span>
+      Commit <span><%= format_patch(patch)%></span>
     </div>
     <div class="parent">
       <%- begin %>
-      Parent <span><%= link_to patch.parent, patch.parent %></span>
+      Parent <span><%= format_patch(patch.parent) %></span>
       <%- rescue NoPatch => e %>
       <%- end %>
     </div>

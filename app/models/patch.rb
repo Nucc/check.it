@@ -33,15 +33,16 @@ class Patch
   attr :parent
   attr :tree
   attr :tags
+  attr :repository
   
   # Currently we use Grit for git representation.
   # Later if we change to other git ruby edition, 
   # we should modify only this class
   # +patch = Grit patch
-  def initialize(patch)
+  def initialize(repository, patch)
     @etalon = patch
+    @repository = repository
   end
-  
   
   #
   # Getter methods
@@ -68,7 +69,7 @@ class Patch
   end
   
   def parent
-    return Patch.new(@etalon.parents[0]) unless @etalon.parents[0].nil?
+    return Patch.new(repository, @etalon.parents[0]) unless @etalon.parents[0].nil?
     raise NoPatch
   end
   
@@ -94,7 +95,7 @@ class Patch
   def diff
     diff = String.new
     
-    @etalon.repo.diff(sha, parent.sha).each do |d|
+    @etalon.repo.diff(parent.sha, sha).each do |d|
       diff += d.diff + "\n"
     end
     
