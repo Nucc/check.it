@@ -50,6 +50,7 @@ tr.plus
 
 tr.commented td
 {
+  background-color: yellow;
   border-bottom: 3px solid red;
 }
 
