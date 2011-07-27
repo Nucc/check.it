@@ -1,7 +1,7 @@
 <%= render :partial => "comments/user", :object => comment.user %>
 
 <div class="comment">
-  <%= comment.opinion %>
+  <%= simple_format comment.opinion %>
 </div>
 
 <div style="clear: both"></div>
