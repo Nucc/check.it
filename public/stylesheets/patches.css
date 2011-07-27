@@ -55,7 +55,6 @@ tr.commented td
 
 tr.info
 {
-  background-color: #FFF;
 }
 
 tr.head
@@ -145,6 +144,12 @@ div.commit div.info
   color: #777;
   font-size: 11px;
   float: right;
+  
+  background-color: #F3F3F3;
+  border: 1px solid #CCC;
+  line-height: 16px;
+  
+  padding: 3px;
 }
 
 div.commit div.info a
@@ -155,7 +160,7 @@ div.commit div.info a
 div.header .image img
 {
   float: left;
-  height: 60px;
+  height: 70px;
 }
 
 div.header .title
@@ -170,5 +175,5 @@ div.header .title
 
 div.header
 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
