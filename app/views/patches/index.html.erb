@@ -1,9 +1,3 @@
-<div class="header">
-  <div class="image"><%= image_tag "nerd_guy.png"%></div>
-  <div class="title"><%= @repository.name %></div>
-  <div class="clear"></div>
-</div>
-
 <%- by_day(@patches).each do |day| %>
 <div class="patches">
   <div class="day">
