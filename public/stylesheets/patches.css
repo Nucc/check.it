@@ -88,6 +88,12 @@ td.line
   width: 100%;
 }
 
+td.line a
+{
+  text-decoration: none;
+  color: #333;
+}
+
 .tags
 {
   background-color: yellow;

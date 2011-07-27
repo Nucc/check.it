@@ -29,7 +29,9 @@
                                          new_comment_path(:id => @patch.to_s, :block => block.number, :line => i),
                                          :remote => true if line.plus? %></td>
 
-          <td class="line"><%= format_line(line.content) %></td>
+          <td class="line"><%= link_to format_line(line.content.strip), 
+                                       new_comment_path(:id => @patch.to_s, :block => block.number, :line => i),
+                                       :remote => true %></td>
         </tr>
         <tr class="info" style="display: none">
             <td></td>

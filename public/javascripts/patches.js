@@ -12,7 +12,7 @@ function updateRow(info_tr_element)
 
 $(document).ready(function()
 {
-  $(".diff .number a").live("ajax:beforeSend", function(event, ui)
+  $(".diff .number a, .diff .line a").live("ajax:beforeSend", function(event, ui)
   {
     var tr = $(event.target).parents("tr").next("tr.info");
     if (tr.hasClass("open"))
@@ -23,7 +23,7 @@ $(document).ready(function()
     }
   });
   
-  $(".diff .number a").live("ajax:complete", function(event, ui)
+  $(".diff .number a, .diff .line a").live("ajax:complete", function(event, ui)
   {
     var tr = $(event.target).parents("tr").next("tr.info");
     tr.find(".reply").html(ui.responseText);
