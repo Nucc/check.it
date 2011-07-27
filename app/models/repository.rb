@@ -6,8 +6,8 @@ class Repository
   
   attr :patches
   
-  
-  def initialize(url, branch)
+  def initialize(url, branch = nil)
+    @url = url
     @grit_object = Grit::Repo.new(url)
     @name = url.split("/")[-1]
     @branch = branch
@@ -29,6 +29,14 @@ class Repository
       temp << Patch.new(self, commit)
     end
     return temp
+  end
+  
+  def branches
+    branches = []
+    @grit_object.branches.each do |b|
+      branches << Patch.new(Repository.new(@url, b.name), b.commit)
+    end
+    return branches
   end
   
   def patch(id)
