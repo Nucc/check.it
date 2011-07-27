@@ -107,7 +107,6 @@ div.commit
   background-color: #F0F3F7;
   padding: 10px;
   border: 1px solid #BEDCE7;
-  padding-bottom: 25px;
 }
 
 
@@ -117,7 +116,7 @@ div.commit div.description
   float: left;
 }
 
-div.commit div.description div.message
+div.commit div.message
 {
   padding-bottom: 5px;
   padding-top: 10px;

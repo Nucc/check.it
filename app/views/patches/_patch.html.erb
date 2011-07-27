@@ -9,15 +9,7 @@
     </div>
     
     <div class="date"><%= format_date(patch.date) %></div>
-  
-    <div class="message">
-     <%- if show_long_message %>
-        <div class="message"><%= change_endlines(patch.message) %></div>
-      <%- else %>
-        <div class="message"><%= link_to change_endlines(patch.message.split("\n")[0]), repository_branch_patch_url(patch.repository, patch.repository.branch, patch) %></div>
-      <%- end %>
-    </div>
-  
+    
     <%- if patch.comments.length > 0 %>
     <div class="comments"><%= pluralize(patch.comments.length, "comment") %></div>
     <%- end %>
@@ -46,5 +38,14 @@
     <%- end %>
   </span>
   <%- end -%>
+
+  <div class="message">
+   <%- if show_long_message %>
+      <div class="message"><%= simple_format(patch.message) %></div>
+    <%- else %>
+      <div class="message"><%= link_to simple_format(patch.message.split("\n")[0]), repository_branch_patch_url(patch.repository, patch.repository.branch, patch) %></div>
+    <%- end %>
+  </div>
+
   <div style="clear: both"></div>
 </div>
