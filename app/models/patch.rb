@@ -36,7 +36,7 @@ class Patch
   attr :repository
   
   # Currently we use Grit for git representation.
-  # Later if we change to other git ruby edition, 
+  # Later if we change it to another git ruby implementation, 
   # we should modify only this class
   # +patch = Grit patch
   def initialize(repository, patch)
@@ -79,22 +79,21 @@ class Patch
   
   def tags
     tags = []
-    @etalon.repo.tags.each do |tag|
-      tags << tag.name if tag.commit.id == @etalon.id
+    @repository.tags.each do |tag|
+      tags << tag.name if tag.commit.sha == @etalon.id
     end
     tags
   end
   
   def comments
-    commit = Commit.find_by_sha(sha)
-    comments = []
     comments = commit.comments if commit
-    return comments
+    comments || []
   end
   
   def diff
     diff = String.new
     
+    # We should use the d self
     @etalon.repo.diff(parent.sha, sha).each do |d|
       diff += d.diff + "\n"
     end
@@ -122,4 +121,11 @@ class Patch
   def to_s
     sha
   end
+  
+protected
+
+  def commit
+    @commit ||= Commit.find_by_sha(sha)
+  end
+  
 end

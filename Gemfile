@@ -38,3 +38,7 @@ group :development do
   gem 'ruby-debug'
   gem 'ruby-prof'
 end
+
+group :test do
+  gem 'mocha', "0.9.8"
+end
