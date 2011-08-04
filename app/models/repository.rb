@@ -39,6 +39,10 @@ class Repository
     return branches
   end
   
+  def tags
+    @grit_object.tags
+  end
+  
   def patch(id)
     Patch.new( self, @grit_object.commit(id) )
   end
