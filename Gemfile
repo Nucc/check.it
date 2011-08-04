@@ -1,8 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'mysql2', "0.2.7"
-
-gem 'rails', '3.0.6'
+gem 'rails', '3.0.9'
 
 gem 'grit', '2.4.0'
 
