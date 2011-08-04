@@ -48,5 +48,9 @@ $(document).ready(function()
     $(event.target).removeClass("active");
   });
 
-  
+  $("#repository_branch").live("change", function(event)
+  {
+    window.location = $("#branch_" + event.target.value)[0].value;
+  })
 });
+

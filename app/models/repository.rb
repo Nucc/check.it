@@ -17,8 +17,12 @@ class Repository
     @branch or "master"
   end
   
+  def branch_path
+    repository_branch_path(self, branch)
+  end
+  
   def name
-    @name.camelcase
+    @name
   end
   
   def patches(number = 30, index = 0)
