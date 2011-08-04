@@ -49,6 +49,8 @@ Reviewer::Application.routes.draw do
     resources :branches, :constraints => { :id => %r([^/;,?]+) } do
       resources :patches, :constraints => { :id => %r([^/;,?]+) }
     end
+    
+    resources :patches, :constraints => { :id => %r([^/;,?]+) }
   end
 
   # Sample resource route within a namespace:

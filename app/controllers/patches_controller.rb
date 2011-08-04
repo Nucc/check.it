@@ -25,13 +25,16 @@ class PatchesController < ApplicationController
 private
 
   def title
-    "#{repository.name} [#{repository.branch}]"
+    "#{repository.name}"
   end
 
   def repository
-    @repository ||= Repository.new("/Users/developer/Desktop/#{params[:repository_id]}", params[:branch_id].to_s)
+    @repository ||= Repository.new("/Users/developer/Desktop/#{params[:repository_id]}", branch)
   end
 
+  def branch
+    (params[:branch_id] || "master").to_s
+  end
 
   
 end
