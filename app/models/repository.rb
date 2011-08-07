@@ -48,7 +48,8 @@ class Repository
   end
   
   def patch(id)
-    Patch.new( self, @grit_object.commit(id) )
+    obj = @grit_object.commit(id)
+    return (obj && Patch.new( self, obj ))
   end
   
   def count
