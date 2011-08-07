@@ -4,4 +4,4 @@ log/*.log
 tmp/**/*
 db/schema.rb
 config/database.yml
-
+test/**/*
