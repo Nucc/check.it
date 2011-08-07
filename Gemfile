@@ -41,4 +41,9 @@ end
 
 group :test do
   gem 'mocha', "0.9.8"
+  gem 'shoulda', "2.11.3"
+end
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.6"
 end
