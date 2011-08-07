@@ -21,8 +21,10 @@
     </div>
     <div class="parent">
       <%- begin %>
-      Parent <span><%= format_patch(patch.parent) %></span>
+      Parent <span><%= format_patch(patch.parent) %>
       <%- rescue NoPatch => e %>
+      <%- ensure %>
+        </span>
       <%- end %>
     </div>
 
