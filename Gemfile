@@ -40,6 +40,7 @@ group :development do
 end
 
 group :test do
+  gem 'capybara', "1.0.0"
   gem 'mocha', "0.9.8"
   gem 'shoulda', "2.11.3"
 end
