@@ -70,6 +70,9 @@ class PatchTest < ActiveSupport::TestCase
   end
   
   test "diffs" do
-    
+  end
+  
+  test "to_s" do
+    assert_equal @patch.to_s, "24"
   end
 end
