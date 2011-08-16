@@ -29,7 +29,7 @@
                                          new_comment_path(:block => block.number, :line => i),
                                          :remote => true if line.plus? %></td>
 
-          <td class="line"><%= link_to format_line(line.content), 
+          <td class="line"><%= link_to format_line(line.content).html_safe, 
                                        new_comment_path(:block => block.number, :line => i),
                                        :remote => true %></td>
         </tr>
