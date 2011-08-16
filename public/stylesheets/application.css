@@ -30,3 +30,9 @@ div.clear
 {
   clear: both;
 }
+
+div.header div.branches
+{
+  float: right;
+  margin-bottom: 15px;
+}
