@@ -6,7 +6,7 @@ describe Repository do
 
   describe :commits do
     it "should be present some" do
-      assert_equal(subject.patches.length, 3)
+      assert_equal(subject.patches.length, 2)
     end
   
     it "should be exactly 2" do
@@ -38,12 +38,20 @@ describe Repository do
     end
     
     it "should be asked" do
-      branches = ["master"]
+      branches = []
       subject.branches.each do |ref|
-        assert(branches.include?(ref.repository.branch))
+        branches << ref.repository.branch
+      end
+      ["master", "test_repository_model"].each do |e|
+        assert(branches.include?(e))
       end
     end
     
+    it "should give short names in array" do
+      branches = subject.branches :show => :only_names
+      ["master", "test_repository_model"].each do |e|
+        assert(branches.include?(e))
+      end
+    end
   end
-
 end
