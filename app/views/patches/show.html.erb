@@ -23,14 +23,14 @@
     
         <tr class="<%= class_name(line, comments.length) %>">
           <td class="number"><%= link_to line.minus,
-                                         new_comment_path(:id => @patch.to_s, :block => block.number, :line => i),
+                                         new_comment_path(:block => block.number, :line => i),
                                          :remote => true if line.minus? %></td>
           <td class="number"><%= link_to line.plus,
-                                         new_comment_path(:id => @patch.to_s, :block => block.number, :line => i),
+                                         new_comment_path(:block => block.number, :line => i),
                                          :remote => true if line.plus? %></td>
 
           <td class="line"><%= link_to format_line(line.content), 
-                                       new_comment_path(:id => @patch.to_s, :block => block.number, :line => i),
+                                       new_comment_path(:block => block.number, :line => i),
                                        :remote => true %></td>
         </tr>
         <tr class="info" style="display: none">

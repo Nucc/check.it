@@ -3,6 +3,7 @@ class PatchesController < ApplicationController
   layout "reviewer"
 
   before_filter :authenticate_user!
+  before_filter :should_have_repository, :only => [:show]
 
   def index
     @pager = ::Paginator.new(repository.count, 30) do |offset, per_page|
@@ -10,9 +11,10 @@ class PatchesController < ApplicationController
     end
     @patches = @pager.page(params[:page])
     @repository = repository
+    session[:repository_id] = params[:repository_id]
   end
   
-  def show
+  def show    
     @patch = repository.patch(params[:id])
     commit = Commit.find_by_sha(params[:id])
     if commit
@@ -20,6 +22,7 @@ class PatchesController < ApplicationController
     else
       @comments = []
     end
+    session[:patch_id] = params[:id]
   end
 
 private
@@ -34,7 +37,5 @@ private
 
   def branch
     (params[:branch_id] || "master").to_s
-  end
-
-  
+  end  
 end

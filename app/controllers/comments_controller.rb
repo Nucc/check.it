@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
-  before_filter :find_comment, :only => [:show, :edit, :update, :destroy]
 
+  before_filter :find_comment, :only => [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  before_filter :should_have_repository
+  before_filter :should_have_branch, :except => [:index]
+    
   # GET /comments
   # GET /comments.xml
   def index
@@ -26,7 +30,7 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
-    @comment.commit_sha = params[:id]
+    @comment.commit_sha = session[:patch_id]
     @comment.block = params[:block]
     @comment.line = params[:line]
 
@@ -92,9 +96,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
-    def find_comment
-      @comment = Comment.find(params[:id])
-    end
-
+private
+  def find_comment
+    @comment = Comment.find(params[:id])
+  end
 end
