@@ -35,8 +35,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development do
-  gem 'ruby-debug'
-  gem 'ruby-prof'
 end
 
 group :test do
@@ -47,4 +45,6 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.6"
+  gem 'ruby-debug'
+  gem 'ruby-prof'
 end
