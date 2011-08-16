@@ -35,10 +35,15 @@ class Repository
     return temp
   end
   
-  def branches
+  def branches(args = {:show => :patches})
     branches = []
     @grit_object.branches.each do |b|
-      branches << Patch.new(Repository.new(@url, b.name), b.commit)
+      case args[:show]
+        when :only_names
+          branches << b.name
+        else
+          branches << Patch.new(Repository.new(@url, b.name), b.commit)
+      end
     end
     return branches
   end
