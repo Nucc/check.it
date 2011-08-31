@@ -27,13 +27,13 @@ class Block
 
     if plain_line.match /^@@ (.*)/
 
-      patch_info = plain_line.match(/^@@ \-(\d*),(\d*) \+(\d*),(\d*)/)
+      patch_info = plain_line.match(/^@@ \-(\d*)(,(\d*)){0,1} \+(\d*)(,(\d*)){0,1}/)
 
-      @plus   = patch_info[3].to_i - 1
+      @plus   = patch_info[4].to_i - 1
       @minus  = patch_info[1].to_i - 1
       
-      @length_plus  = @plus + patch_info[4].to_i 
-      @length_minus = @minus+ patch_info[2].to_i
+      @length_plus  = @plus  + (patch_info[6] || 1).to_i
+      @length_minus = @minus + (patch_info[3] || 1).to_i
       
       @size_info = plain_line
       return true
