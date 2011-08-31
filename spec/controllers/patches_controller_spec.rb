@@ -6,7 +6,7 @@ describe PatchesController do
 
   before :each do
     @controller = PatchesController.new
-    @controller.stubs(:repository).returns(Repository.new("test/fixtures/test.git/"))
+    @controller.stubs(:repository).returns(Repository.new("#{CONFIG["repository_path"].to_s}/test.git/"))
   end
 
 

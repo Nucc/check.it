@@ -1,0 +1,9 @@
+production:
+  repository_path: <%= ::Rails.root %>/repositories
+  
+test:
+  repository_path: <%= ::Rails.root %>/test/fixtures
+  
+development:
+  repository_path: <%= ::Rails.root %>/repositories
+ 
