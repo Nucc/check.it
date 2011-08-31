@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
     redirect_to :controller => :repositories if params[:repository_id].nil?
   end
   
-  def should_have_branch
-    params[:branch_id] ||= session[:branch_id]
-    redirect_to :controller => :repositories if params[:branch_id].nil?
+  def should_have_patchid
+    params[:patch_id] ||= session[:patch_id]
+    redirect_to :controller => :repositories if params[:patch_id].nil?
   end
 end

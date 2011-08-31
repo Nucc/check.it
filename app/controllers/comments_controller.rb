@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_filter :find_comment, :only => [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   before_filter :should_have_repository
-  before_filter :should_have_branch, :except => [:index]
+  before_filter :should_have_patchid, :except => [:index]
     
   # GET /comments
   # GET /comments.xml

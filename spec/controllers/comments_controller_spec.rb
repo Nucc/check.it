@@ -21,7 +21,7 @@ describe CommentsController do
     
     it "should have repository and patch id" do
       session[:repository_id] = "1"
-      session[:branch_id] = "2"
+      session[:patch_id] = "2"
       get :new
       assert_response :success
     end
@@ -31,27 +31,27 @@ describe CommentsController do
       assert_redirected_to repositories_path
     end
 
-    it "should redirect to repositories/index if branch id is missing" do
+    it "should redirect to repositories/index if patch id is missing" do
       session[:repository_id] = "1"
       get :new
       assert_redirected_to repositories_path
     end
   
     it "should redirect to repositories/index if repository id is missing" do
-      session[:branch_id] = "1"
+      session[:patch_id] = "1"
       get :new
       assert_redirected_to repositories_path
     end
     
     it "should get the repository id from url" do
-      session[:branch_id] = "2"
+      session[:patch_id] = "2"
       get :new, :repository_id => "1"
       assert_response :success
     end
     
     it "should get the branch id from url" do
       session[:repository_id] = "2"
-      get :new, :branch_id => "1"
+      get :new, :patch_id => "1"
       assert_response :success      
     end    
   end
