@@ -1,3 +1,6 @@
+
+# More information about matchers: http://jonathanhui.com/ruby-rails-3-testing-rspec-2
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
