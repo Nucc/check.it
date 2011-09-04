@@ -32,7 +32,7 @@ private
   end
 
   def repository
-    @repository ||= Repository.new("#{Rails.root}/repositories/#{params[:repository_id]}", branch)
+    @repository ||= Repository.new("#{CONFIG["repository_path"]}/#{params[:repository_id]}", branch)
   end
 
   def branch
