@@ -184,3 +184,7 @@ div.header
 {
   margin-bottom: 20px;
 }
+
+a.update {
+  float: right;
+}

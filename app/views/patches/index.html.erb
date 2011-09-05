@@ -1,3 +1,5 @@
+<%= link_to "Update the repository", {:controller => "update", :repository_id => @repository}, {:class => "update"} %>
+
 <%- by_day(@patches).each do |day| %>
 <div class="patches">
   <div class="day">
