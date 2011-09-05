@@ -45,6 +45,8 @@ Reviewer::Application.routes.draw do
   #     end
   #   end
 
+  match "/repositories/:repository_id", :controller => :patches, :action => :index, :constraints => { :repository_id => %r([^/;,?]+) }
+
   resources :repositories, :constraints => { :id => %r([^/;,?]+) } do
     resources :branches, :constraints => { :id => %r([^/;,?]+) } do
       resources :patches, :constraints => { :id => %r([^/;,?]+) }

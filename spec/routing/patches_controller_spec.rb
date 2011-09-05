@@ -19,5 +19,12 @@ describe PatchesController do
                       :branch_id => "test.branch")
   end
   
+  it "/repositories/foo should route to /repositories/foo/patches" do
+    { :get => "/repositories/test.git"}.
+      should route_to(:controller => "patches",
+                      :action => "index",
+                      :repository_id => "test.git")
+  end
+  
 end
  
