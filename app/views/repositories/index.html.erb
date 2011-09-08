@@ -1,0 +1,20 @@
+<% @repositories.each do |repository| %>  
+  <div class="repository">
+    <div class="header">
+      <div class="icon">
+        <%= image_tag "repository.png" %>
+      </div>
+      <div class="name">
+        <%= link_to repository.name, repository_url(repository.name) %>
+      </div>
+      <div style="clear: both"></div>
+    </div>
+    <div class="branches">
+      <% repository.branches({:show => :only_names}).each do |branch| %>
+      <div class="branch">
+        <ol><%= link_to branch, repository_branch_patches_url(repository, branch) %></ol>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end%>
