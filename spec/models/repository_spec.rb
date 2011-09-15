@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Repository do
 
-  subject { Repository.new("test/fixtures/test.git") }
+  subject { Repository.new("#{CONFIG['repository_path']}/test.git") }
 
   describe :commits do
     it "should be present some" do
@@ -27,13 +27,12 @@ describe Repository do
   end
 
   describe :branch do
-    
     it "should be master by default" do
       subject.branch.should == "master"
     end
     
     it "can be changed" do
-      repository = Repository.new("test/fixtures/test.git", "test")
+      repository = Repository.new("#{CONFIG['repository_path']}/test.git", "test")
       repository.branch.should == "test"
     end
     

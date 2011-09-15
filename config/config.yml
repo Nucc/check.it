@@ -1,9 +1,11 @@
 production:
   repository_path: <%= ::Rails.root %>/repositories
+  sender_email: review@email.me
   
 test:
-  repository_path: <%= ::Rails.root %>/test/fixtures
-  
+  repository_path: <%= ::Rails.root %>/test/fixtures/repositories
+  sender_email: review@email.me
+
 development:
-  repository_path: <%= ::Rails.root %>/repositories
- 
+  repository_path: <%= ::Rails.root %>/test/fixtures/repositories
+  sender_email: review@email.me

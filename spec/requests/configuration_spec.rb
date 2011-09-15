@@ -7,7 +7,7 @@ describe "Configuration", :type => :request do
   describe "should have option for" do
 
     it "repository_path" do
-      CONFIG["repository_path"].should == "#{::Rails.root.to_s}/test/fixtures"
+      CONFIG["repository_path"].should == "#{::Rails.root.to_s}/test/fixtures/repositories"
     end
 
   end
