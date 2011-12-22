@@ -24,9 +24,9 @@
   
   <div class="header">
     <div class="image"><%= image_tag "nerd_guy.png"%></div>
-    <div class="title"><%= @page_title || "" %></div>
+    <div class="title"><%= link_to @page_title, repository_branch_patches_url(@repository, session[:branch_id]) || "" %></div>
     <div class="branches">
-      <%= select_tag("branch_id", options_for_select(["Select branch"] + @repository.branches(:show => :only_names), params[:branch_id]))%>
+      <%= select_tag("branch_id", options_for_select(["Select branch"] + @repository.branches(:show => :only_names), session[:branch_id]))%>
       <%- @repository.branches.each do |c| %>
         <input type="hidden" id="branch_<%= c.repository.branch %>" value="<%= repository_branch_patches_path(c.repository, c.repository.branch) %>">
       <%- end %>
