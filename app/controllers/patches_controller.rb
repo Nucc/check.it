@@ -12,7 +12,7 @@ class PatchesController < ApplicationController
     @patches = @pager.page(params[:page])
     @repository = repository
     session[:repository_id] = params[:repository_id]
-    session[:branch_id] = params[:branch_id]
+    session[:branch_id] = params[:branch_id] || "master"
   end
   
   def show    
