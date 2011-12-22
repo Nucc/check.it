@@ -37,9 +37,23 @@ protected
   end
 
   def update_references
+    
+    # Remove all the references first
     Repository.new(repository).branches(:show => :only_names).each do |branch|
-      plain_repository.update_ref({}, "refs/heads/#{branch}", "origin/#{branch}")
+      plain_repository.update_ref({"d" => true}, "refs/heads/#{branch}") unless branch == "master"
     end
+    
+    # Set the branches using the origin remote 
+    Grit::Repo.new(repository).remotes.each do |remote|
+      if remote.name.match(/^origin/)
+        branch = remote.name.split("origin/")[1]
+        
+        if not branch.include?("/") and branch != "HEAD"
+          plain_repository.update_ref({}, "refs/heads/#{branch}", "origin/#{branch}")
+        end
+      end
+    end
+
   end
 
   def plain_repository
