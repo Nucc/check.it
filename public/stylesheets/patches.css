@@ -188,3 +188,15 @@ div.header
 a.update {
   float: right;
 }
+
+#paginator {
+  text-align: center;
+  margin: auto;
+  font-size: 16px;
+}
+
+#paginator .current{
+  font-weight: bold;
+  font-size: 20px;
+}
+
