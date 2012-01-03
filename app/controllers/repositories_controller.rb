@@ -23,4 +23,8 @@ protected
     return repositories
   end
 
+  def title
+    "Repositories and branches"
+  end
+
 end
