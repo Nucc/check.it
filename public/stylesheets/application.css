@@ -11,6 +11,7 @@ div.mainpage
   border: 1px solid #AAA;
   padding: 20px;
   margin: auto;
+  margin-top: 40px;
 }
 
 p.notice,
@@ -35,4 +36,108 @@ div.header div.branches
 {
   float: right;
   margin-bottom: 15px;
+}
+
+div.flyer {
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 40px;
+  background-color: #444444;
+  color: #FFF;
+  
+  
+}
+
+div.flyer .title {
+  font-size: 24px;
+  font-weight: bold;
+  float: left;
+  margin-right: 30px;
+  height: 30px;
+}
+
+div.flyer .title .text {
+  padding-top: 8px;
+  float: left;
+}
+
+div.flyer .title .image {
+  float: left;
+  margin: 5px;
+}
+
+div.right {
+  float: right;
+}
+
+div.flyer li {
+  float: left;
+  list-style: none;
+  vertical-align: middle;
+  padding: 10px;
+  margin-top: 2px;
+  font-weight: bold;
+  background-color: #555;
+  margin-left: 2px;
+}
+
+
+div.flyer li .image {
+  margin-top: -7px;
+  padding: 0px;
+  float: left;
+  margin-left: 15px;
+  margin-bottom: -10px;
+}
+
+div.flyer li .text {
+  float: left;
+}
+
+
+div.flyer ul {
+
+  font-size: 12px;
+  margin: 0;
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+  background: #FFF;
+}
+
+div.flyer ul li {
+  display: block;
+  position: relative;
+  float: left;
+  color: #333;  
+  background-color: #FFF;
+  padding: 5px 15px 5px 15px;  
+  margin-top: 0px;
+  border-bottom: 1px solid #888;
+}
+
+div.flyer li ul { display: none;   border: 1px solid #777;}
+
+div.flyer ul li a {
+}
+
+
+div.flyer li:hover ul {
+  display: block;
+  position: absolute;
+}
+
+div.flyer li:hover li {
+  float: none;
+  font-size: 11px;
+}
+
+
+.shadow {
+  -moz-box-shadow:    1px 1px 1px 1px #AAA;
+  -webkit-box-shadow: 1px 1px 1px 1px #AAA;
+  box-shadow:         1px 1px 1px 1px #AAA;
 }

@@ -39,6 +39,7 @@ class CommentsController < ApplicationController
       wants.js { render "new.html", :layout => false }
       wants.xml  { render :xml => @comment }
     end
+    
   end
 
   # GET /comments/1/edit
@@ -57,10 +58,12 @@ class CommentsController < ApplicationController
     
     @comment = Comment.new(params[:comment])
     @comment.commit = @commit
-    @comment.user = current_user
+    @comment.user = @user
 
     respond_to do |wants|
       if @comment.save
+        create_notify(@commit, params[:comment])
+        
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
         wants.xml  { render :xml => @comment, :status => :created, :location => @comment }
@@ -100,4 +103,44 @@ private
   def find_comment
     @comment = Comment.find(params[:id])
   end
+  
+  def create_notify(commit, comment)
+    repo = Repository.by_name(session[:repository_id])
+    patch = repo.patch(comment[:commit_sha])
+    
+    commenters = Array.new
+    commenters << @user.email
+    commenters << patch.author_email
+
+    # notify the author
+    author =  User.find_by_email(patch.author_email)
+    if author and author.email != @user.email
+      send_notification(Notify::PATCH, author)
+    end
+
+
+    # notify the commenters
+    comments = Comment.includes([:user]).
+                       where(['comments.commit_id = ? and comments.block = ? and comments.line = ?',
+                               commit.id, comment[:block], comment[:line]]
+                            ).all
+
+    comments.each do |comment|
+      if not commenters.include?(comment.user.email)
+        commenters << comment.user.email        
+        send_notification(Notify::COMMENT, comment.user)
+      end
+    end
+  end
+
+  def send_notification(topic, to_user)
+    notify = Notify.new
+    notify.topic = topic
+    notify.status = Notify::UNREAD
+    notify.repository_id = session[:repository_id]
+    notify.user = to_user
+    notify.comment = @comment
+    notify.save!
+  end
+  
 end

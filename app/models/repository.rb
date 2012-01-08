@@ -5,6 +5,24 @@ require "grit.rb"
 class Repository
   
   attr :patches
+
+  def self.by_name(name)
+    repository_path = CONFIG["repository_path"]
+    return Repository.new("#{repository_path}/#{name}")
+  end
+  
+  def self.all
+    repositories = []
+    repository_path = CONFIG["repository_path"]
+    Dir.foreach(repository_path).each do |dir|    
+      next if dir == ".." or dir == "."
+      begin
+        repositories << Repository.new("#{repository_path}/#{dir}")
+      rescue Grit::InvalidGitRepositoryError => e
+      end
+    end
+    repositories
+  end
   
   def initialize(url, branch = nil)
     @url = url
@@ -23,6 +41,10 @@ class Repository
   
   def name
     @name
+  end
+  
+  def description
+    
   end
   
   def patches(number = 30, index = 0)

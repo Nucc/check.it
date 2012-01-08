@@ -3,28 +3,53 @@
 <head>
   <title>Reviewer</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  
+  <%= javascript_include_tag :defaults %>  
   <%= javascript_include_tag "patches" %>
-  
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<% if notice %>
-  <p class="notice"><%= notice %></p>
-<% end %>
-
-<% if alert %>
-  <p class="alert"><%= alert %></p>
-<% end %>
+<div class="flyer shadow">
+  <div>
+    
+    <div class="title">
+      <div class="image">
+        <%= image_tag "nerd_guy_white.png", :height => "30px" %>
+      </div>
+      <div class="text">check.it</div>
+    </div>
+    
+    <li>Messages (<%= @notifies.length %>)
+      <ul>
+        <% if @notifies.length > 0 %>
+          <%- @notifies.each do |notify| %>
+            <li><%= link_to format_notify(notify), notify_url(notify) %></li>
+          <%- end %>
+        <% else %>
+          <li>No messages.</li>
+        <% end %>
+      </ul>
+    </li>
+    
+    
+  </div>
+  <div class="right">
+    <li>
+      <div class="text"><%= @user.username %></div>
+      <div class="image"><%= image_tag avatar(@user.email), :height => "30px" %></div>
+      <ul>
+        <li><a href="/users/sign_out">Log out</a></li>
+      </ul>
+    </li>
+  </div>
+</div>
 
 
 <div class="mainpage">
   
+  <%- if @repository %>
   <div class="header">
-    <div class="image"><%= image_tag "nerd_guy.png"%></div>
-    <div class="title"><%= link_to @page_title, repository_branch_patches_url(@repository, session[:branch_id]) || "" %></div>
+    <div class="title"><%= link_to "/", "/" %> <%= link_to @page_title, repository_branch_patches_url(@repository, session[:branch_id]) || "" %></div>
     <div class="branches">
       <%= select_tag("branch_id", options_for_select(["Select branch"] + @repository.branches(:show => :only_names), session[:branch_id]))%>
       <%- @repository.branches.each do |c| %>
@@ -33,8 +58,11 @@
     </div>
     <div class="clear"></div>
   </div>
+  <%- end %>
+
 
   <%= yield %>
+  
 </div>
 
 </body>

@@ -1,5 +1,7 @@
 class RepositoriesController < ApplicationController
 
+  layout "reviewer"
+
   before_filter :authenticate_user!
 
   def index
@@ -17,7 +19,7 @@ protected
       
       begin
         repositories << Repository.new("#{repository_path}/#{dir}")
-      rescue Grit::InvalidGitRepositoryError
+      rescue Grit::InvalidGitRepositoryError => e
       end
     end
     return repositories
