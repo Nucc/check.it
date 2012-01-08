@@ -34,6 +34,7 @@ protected
   def fetch_origin
     ::Grit::Git.git_timeout = 60
     plain_repository.fetch
+    plain_repository.remote({}, "prune", "origin")
   end
 
   def update_references
