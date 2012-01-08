@@ -12,7 +12,7 @@
     <div class="branches">
       <% repository.branches({:show => :only_names}).each do |branch| %>
       <div class="branch">
-        <ol><%= link_to branch, repository_branch_patches_url(repository, branch) %></ol>
+        <ul><%= link_to branch, repository_branch_patches_url(repository, branch) %> </ul>
       </div>
       <% end %>
     </div>
