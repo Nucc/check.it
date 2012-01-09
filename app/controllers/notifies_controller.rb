@@ -20,7 +20,9 @@ class NotifiesController < ApplicationController
     
     commit.comments.each do |comment|
       notify = comment.notify
-      if notify
+      
+      # only the user can change the read flag!
+      if notify and notify.user_id == @user.id
         notify.status = Notify::READ
         notify.save!
       end
