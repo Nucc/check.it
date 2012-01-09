@@ -59,6 +59,11 @@ div.flyer .title {
   height: 30px;
 }
 
+div.flyer .title a {
+  color: #FFF;
+  text-decoration: none;
+}
+
 div.flyer .title .text {
   padding-top: 8px;
   float: left;
