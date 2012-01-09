@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_title
   before_filter :set_user
   before_filter :set_notify_messages
+
+protected
   
   def set_title
     @page_title = title
@@ -15,15 +17,18 @@ class ApplicationController < ActionController::Base
 
 
   def should_have_repository
-    params[:repository_id] ||= session[:repository_id]
-    redirect_to :controller => :repositories if params[:repository_id].nil?
+    set_environment(:repository_id)
   end
   
   def should_have_patchid
-    params[:patch_id] ||= session[:patch_id]
-    redirect_to :controller => :repositories if params[:patch_id].nil?
+    set_environment(:patch_id)
   end
 
+  def should_have_branch
+    session[:branch_id] ||= "master"
+    set_environment(:branch_id)
+  end
+  
   def set_user
     @user = current_user
   end
@@ -33,4 +38,11 @@ class ApplicationController < ActionController::Base
     @notifies = Notify.where(["user_id = ? and status = ?", current_user.id, Notify::UNREAD]).all
   end
 
+private
+
+  def set_environment(key)
+    params[key] ||= session[key]
+    session[key] = params[key] unless session[key]
+    redirect_to :controller => :repositories if params[key].nil?
+  end
 end

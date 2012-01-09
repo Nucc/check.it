@@ -4,6 +4,7 @@ class PatchesController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :should_have_repository, :only => [:show]
+  before_filter :should_have_branch, :only => [:show]
 
   def index
     @pager = ::Paginator.new(repository.count, 30) do |offset, per_page|
