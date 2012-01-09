@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def format_notify(notify)
-    name = notify.user.username
+    name = notify.comment.user.username
     
     message = ""
     if (notify.topic == Notify::PATCH)
