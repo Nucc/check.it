@@ -1,4 +1,5 @@
 require 'grit'
+require 'digest/sha1'
 
 module Review
   class Day
@@ -86,8 +87,10 @@ class Patch
   end
   
   def comments
-    comments = commit.comments if commit
-    comments || []
+    return commit.comments if commit
+    return CommitDiff.find_by_sha(self.diff_sha).comments
+  rescue
+    []
   end
   
   def diff
@@ -124,6 +127,17 @@ class Patch
   #
   def to_s
     sha
+  end
+  
+  def diff_sha
+    return @diff_sha if @diff_sha
+    
+    str = String.new
+    @etalon.diffs.each do |block| 
+      str += block.diff.to_s
+    end
+  
+    @diff_sha = Digest::SHA1.hexdigest(str)
   end
   
 protected

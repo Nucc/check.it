@@ -9,6 +9,7 @@ class UpdateController < ApplicationController
     begin
       fetch_origin
       update_references
+      index_patches
       @response = Response.new :result => :success
     rescue Exception => e
       @response = Response.new :result => :error, :message => e.to_s  
@@ -54,8 +55,26 @@ protected
         end
       end
     end
-
   end
+  
+  def index_patches
+    Repository.all.each do |repo|
+      repo.branches.each do |branch|
+        add_the_new_patches(branch)
+      end
+    end
+  end
+  
+  def add_the_new_patches(head)
+    commit = Commit.new
+    commit.patch = head
+    commit.commit_diff = CommitDiff.create_or_find(head)
+    commit.save!
+    return add_the_new_patches(head.parent)
+  rescue NoPatch, ActiveRecord::RecordNotUnique
+    return
+  end
+  
 
   def plain_repository
     @plain_repository ||= ::Grit::Git.new("#{repository}/.git")

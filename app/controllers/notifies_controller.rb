@@ -5,8 +5,11 @@ class NotifiesController < ApplicationController
   
   def show
     notify = Notify.find(params[:id])
+        
     
     commit    = notify.comment.commit
+    return redirect_to("/") unless commit
+    
     patch_sha = commit.sha
     
     @patch = nil

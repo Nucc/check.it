@@ -18,7 +18,7 @@ class PatchesController < ApplicationController
   
   def show    
     @patch = repository.patch(params[:id])
-    commit = Commit.find_by_sha(params[:id])
+    commit = CommitDiff.find_by_sha(@patch.diff_sha)
     if commit
       @comments = commit.comments
     else

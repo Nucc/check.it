@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.xml
   def new
+    
     @comment = Comment.new
     @comment.commit_sha = session[:patch_id]
     @comment.block = params[:block]
@@ -49,20 +50,16 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.xml
   def create
-    @commit = Commit.find_by_sha(params[:comment][:commit_sha])
-    if @commit.nil?
-      @commit = Commit.new
-      @commit.sha = params[:comment][:commit_sha]
-      @commit.save!
-    end
+    repo = Repository.by_name(session[:repository_id])
+    patch = repo.patch(params[:comment][:commit_sha])
     
     @comment = Comment.new(params[:comment])
-    @comment.commit = @commit
+    @comment.commit_diff = CommitDiff.create_or_find(patch)
     @comment.user = @user
 
     respond_to do |wants|
       if @comment.save
-        create_notify(@commit, params[:comment])
+        create_notify(params[:comment])
         
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
@@ -104,7 +101,7 @@ private
     @comment = Comment.find(params[:id])
   end
   
-  def create_notify(commit, comment)
+  def create_notify(comment)
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(comment[:commit_sha])
     
@@ -121,8 +118,8 @@ private
 
     # notify the commenters
     comments = Comment.includes([:user]).
-                       where(['comments.commit_id = ? and comments.block = ? and comments.line = ?',
-                               commit.id, comment[:block], comment[:line]]
+                       where(['comments.commit_diff_id = ? and comments.block = ? and comments.line = ?',
+                               patch.diff_sha, comment[:block], comment[:line]]
                             ).all
 
     comments.each do |comment|
