@@ -7,7 +7,7 @@
   <div class="content">
     
     <span class="message">
-      <% commit = comment.commit_diff.commits[0] %>
+      <% commit = comment.commits[0] %>
       <% patch  = commit.patch %>
       
       <span class="name"><%= "#{comment.user.username}" %> commented 

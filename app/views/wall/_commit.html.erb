@@ -7,14 +7,18 @@
   <div class="content">
     
     <span class="message">
-      <span class="name"><%= "#{commit.patch.author_name}" %> added patch to <%= link_to "#{commit.branch.repository}/#{commit.branch.name}", repository_branch_patches_url(commit.branch.repository, commit.branch.name)%></span><br/><br/>
-      <%= refer_to commit.patch %><br/>
-      <%= change_endlines(description(commit.patch)) %>
+      <span class="name">
+      <% patch = commit.patch %>
+      <% branch = commit.branch %>
+      
+      <%= "#{patch.author_name}" %> added patch to <%= link_to "#{branch.repository}/#{branch.name}", repository_branch_patches_url(branch.repository, branch.name)%></span><br/><br/>
+      <%= refer_to patch %><br/>
+      <%= change_endlines(description(patch)) %>
     </span>
     <div class="clear"></div>
       
     <span class="date">
-      <%= commit.patch.date.strftime("%Y-%m-%d, %H:%M:%S") %>
+      <%= patch.date.strftime("%Y-%m-%d, %H:%M:%S") %>
     </span>
   </div>
   

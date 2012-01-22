@@ -71,16 +71,18 @@ class Repository
   end
   
   def tags
-    @grit_object.tags
+    @tags ||= @grit_object.tags
+    @tags
   end
   
   def patch(id)
-    obj = @grit_object.commit(id)
-    return (obj && Patch.new( self, obj ))
+    @obj ||= @grit_object.commit(id)
+    return (@obj && Patch.new( self, @obj ))
   end
   
   def count
-    @grit_object.commit_count(branch)
+    @commit_count ||= @grit_object.commit_count(branch)
+    @commit_count
   end
   
   def to_s

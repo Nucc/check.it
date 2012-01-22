@@ -2,6 +2,8 @@ class Comment < ActiveRecord::Base
   belongs_to :commit_diff
   belongs_to :user
   has_one    :notify
+  has_many   :commits, :through => :commit_diff
+  
   
   attr_accessor :commit_sha
   

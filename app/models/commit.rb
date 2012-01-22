@@ -2,12 +2,9 @@ class Commit < ActiveRecord::Base
 
   belongs_to :commit_diff
   belongs_to :branch
-  validate :sha, :uniqueness => true
-  
-  def comments
-    commit_diff.comments
-  end
-  
+  validate   :sha, :uniqueness => true
+  has_many   :comments, :through => :commit_diff
+    
   def patch=(patch)
     self.sha = patch.sha
   end
