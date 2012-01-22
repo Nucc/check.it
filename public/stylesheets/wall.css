@@ -1,0 +1,90 @@
+div.wall .commits {
+  width: 600px;
+  border-right: 1px solid #CCC;
+  padding: 0px;
+  float: left;
+}
+
+div.wall .entries {
+  padding: 2px;
+
+}
+
+
+
+div.wall div.commit_entry {
+
+  border: 0px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 15px;
+  font-size: 12px;
+  font family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+}
+
+div.commit_entry div.image {
+  float: left;
+  margin-right: 5px;
+  width: 50px;
+}
+
+div.commit_entry div.image img {
+  height: 36px;
+}
+
+
+div.commit_entry div.content {
+  float: left;
+  padding-bottom: 10px;
+  width: 500px;
+}
+
+div.commit_entry .message {
+  float: left;
+  clear: left;
+}
+
+div.commit_entry .message .name {
+  font-weight: bold;
+}
+
+
+
+div.commit_entry .date {
+  float: left;
+  font-size: 11px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+.repository {
+  margin: 5px;
+  font-size: 12px;
+  padding: 5px;
+  width: 280px;
+  margin: auto;
+
+  border-bottom: 1px solid #CCC;
+
+  float: left;
+}
+
+.repository .name {
+  background-color: #2B7ABA;
+  color: #FFF;
+  padding: 7px;
+}
+
+.repository .branches {
+  padding-left: 10px;
+}
+
+.repository .branches li {
+  margin-top: 5px;
+}
+
+.repository .branches li a {
+  text-decoration: none;
+}
+
