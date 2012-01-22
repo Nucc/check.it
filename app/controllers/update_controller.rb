@@ -60,17 +60,20 @@ protected
   def index_patches
     Repository.all.each do |repo|
       repo.branches.each do |branch|
-        add_the_new_patches(branch)
+        branch_model = Branch.find_or_create_by_repository_and_name(repo.name, branch.repository.branch)
+        add_the_new_patches(branch, branch_model)
       end
     end
   end
   
-  def add_the_new_patches(head)
+  def add_the_new_patches(head, branch)
     commit = Commit.new
     commit.patch = head
     commit.commit_diff = CommitDiff.create_or_find(head)
+    commit.created_at = head.date
+    commit.branch = branch
     commit.save!
-    return add_the_new_patches(head.parent)
+    return add_the_new_patches(head.parent, branch)
   rescue NoPatch, ActiveRecord::RecordNotUnique
     return
   end
