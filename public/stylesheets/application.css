@@ -1,3 +1,7 @@
+@font {
+  font-family: 'Bitstream Vera Sans Mono';
+  src: url('/fonts/VeraMono.ttf');
+}
 body {
   font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
   font-size: 12px;
