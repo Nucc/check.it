@@ -8,6 +8,10 @@ body {
   background-color: #CCC;
 }
 
+a:active, a:hover, a:link, a:visited {
+  color: #007;
+}
+
 div.mainpage
 {
   width: 900px;
