@@ -1,3 +1,7 @@
+div.wall {
+  font-family: Verdana, sans-serif;
+}
+
 div.wall .commits {
   width: 600px;
   border-right: 1px solid #CCC;
@@ -10,17 +14,22 @@ div.wall .entries {
 
 }
 
+div.wall div.date {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
 
 
 div.wall div.commit_entry {
-
   border: 0px;
   padding-bottom: 5px;
   border-bottom: 1px solid #CCC;
   margin-bottom: 15px;
-  font-size: 12px;
-  font family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+  font-size: 11px;
 }
+
+
 
 div.commit_entry div.image {
   float: left;
@@ -36,7 +45,7 @@ div.commit_entry div.image img {
 div.commit_entry div.content {
   float: left;
   padding-bottom: 10px;
-  width: 500px;
+  width: 520px;
 }
 
 div.commit_entry .message {
@@ -54,7 +63,6 @@ div.commit_entry .date {
   float: left;
   font-size: 11px;
   margin-top: 10px;
-  font-weight: bold;
 }
 
 
@@ -77,14 +85,17 @@ div.commit_entry .date {
 }
 
 .repository .branches {
-  padding-left: 10px;
+
 }
 
 .repository .branches li {
   margin-top: 5px;
+  margin-left: 20px;
 }
 
 .repository .branches li a {
   text-decoration: none;
 }
+
+
 
