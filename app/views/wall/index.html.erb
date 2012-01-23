@@ -1,7 +1,18 @@
 <div class="wall">
   
+  
+  
   <div class="commits">
+    <%- date = "" %>
     <%- @entries.each do |entry| %>
+    
+      <%- d = entry.created_at.to_s.split(" ")[0] %>
+      <%- if date != d %>
+        <div class="date"><%= d %></div>
+        <%- date = d %>
+      <%- end %>
+    
+    
       <%- if entry.class.name    == "Commit" %>
         <%= render :partial => "commit", :object => entry %>
       <%- elsif entry.class.name == "Comment" %>
