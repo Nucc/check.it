@@ -41,8 +41,8 @@ protected
 private
 
   def set_environment(key)
-    params[key] ||= session[key]
-    session[key] = params[key] unless session[key]
-    redirect_to :controller => :repositories if params[key].nil?
+    params[key] = session[key] unless params[key]
+    session[key] = params[key]
+    redirect_to "/" if params[key].nil?
   end
 end

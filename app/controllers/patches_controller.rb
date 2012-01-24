@@ -3,8 +3,10 @@ class PatchesController < ApplicationController
   layout "reviewer"
 
   before_filter :authenticate_user!
+  before_filter :use_patch_id_instead_of_id, :only => [:show]
   before_filter :should_have_repository, :only => [:show]
   before_filter :should_have_branch, :only => [:show]
+  before_filter :should_have_patchid, :only => [:show]
 
   def index
     @pager = ::Paginator.new(repository.count, 30) do |offset, per_page|
@@ -40,4 +42,10 @@ private
   def branch
     (params[:branch_id] || "master").to_s
   end  
+
+  def use_patch_id_instead_of_id
+    # FIXME: It isn't so nice, so try to find a solution to bind :id to :patch_id somehow
+    params[:patch_id] = params[:id]
+  end
+
 end
