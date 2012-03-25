@@ -1,6 +1,7 @@
 <%- show_long_message ||= false %>
+<%- reactions = patch.reactions %>
 
-<div class="commit">
+<div class="commit <%= reaction_balance(reactions) %> <%= user_review_balance?(@user, reactions) if @user.email != patch.author_email%>">
   <div class="description"> 
     <div class="profile_image"><%= image_tag avatar(patch.author_email) %></div>
 
@@ -29,18 +30,10 @@
     </div>
 
     <div class="tree">
-      Tree &nbsp;&nbsp;<span><%= patch.tree %></span>
-    </div>      
+       Tree &nbsp;&nbsp;<span><%= patch.tree %></span>
+   </div>      
   </div>
   
-  <%- if patch.tags.size > 0 -%>
-  <span class="tags">
-    <%- patch.tags.each do |tag| %>
-      <span class="tag"><%= tag %></span>
-    <%- end %>
-  </span>
-  <%- end -%>
-
   <div class="message">
    <%- if show_long_message %>
       <div class="message"><%= simple_format(patch.message) %></div>
@@ -49,5 +42,22 @@
     <%- end %>
   </div>
 
-  <div style="clear: both"></div>
+  <%- if patch.reactions.size > 0 -%>
+  <span class="reviewed">
+    <%= render :partial => "reactions/reaction", :collection => patch.reactions %>
+  </span>
+  <%- end -%>
+  
+  <div style="clear: both"></div>  
+  
+  <%- if patch.tags.size > 0 -%>
+   <span class="tags">
+     <%- patch.tags.each do |tag| %>
+       <span class="tag"><%= tag %></span>
+     <%- end %>
+   </span>
+   <%- end -%>
+   
+   
+   <div style="clear: both"></div>  
 </div>

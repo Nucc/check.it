@@ -8,6 +8,7 @@ class WallController < ApplicationController
     @entries = []
     @entries << Comment.all(:limit => 30, :order => "created_at desc")
     @entries << Commit.all(:limit => 30, :order => "created_at desc")
+    @entries << Reaction.all(:limit => 30, :order => "created_at desc")
     @repositories = Repository.all
     
     @entries.flatten!

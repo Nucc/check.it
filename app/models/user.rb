@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_many :notifies
+  
+  has_many :reactions
 end

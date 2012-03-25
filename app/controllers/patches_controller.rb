@@ -20,12 +20,20 @@ class PatchesController < ApplicationController
   
   def show    
     @patch = repository.patch(params[:id])
+
     commit = CommitDiff.find_by_sha(@patch.diff_sha)
+    
+    @reaction = Reaction.new
+    @reaction.commit_diff_id = commit.id
+    
     if commit
-      @comments = commit.comments
+      @comments  = commit.comments
+      @reactions = commit.reactions 
     else
-      @comments = []
+      @comments  = []
+      @reactions = []
     end
+    
     session[:patch_id] = params[:id]
   end
 

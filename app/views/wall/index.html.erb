@@ -17,7 +17,10 @@
         <%= render :partial => "commit", :object => entry %>
       <%- elsif entry.class.name == "Comment" %>
         <%= render :partial => "comment", :object => entry %>
+      <%- elsif entry.class.name == "Reaction" %>
+        <%= render :partial => "reaction", :object => entry %>
       <%- end %>
+      
     <%- end %>
   </div>
 

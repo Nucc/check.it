@@ -1,12 +1,14 @@
 class NotifiesController < ApplicationController
 
+  layout "reviewer"
+
   def index
+    @all_notifies = Notify.find_all_by_user_id(@user.id, :order=> "created_at desc")
   end
   
   def show
     notify = Notify.find(params[:id])
         
-    
     commit    = notify.comment.commit
     return redirect_to("/") unless commit
     

@@ -100,9 +100,34 @@ td.line a
   background-color: yellow;
   padding: 3px;
   border: 1px solid #444;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+  float: right;
+}
+
+.reviewed
+{
+  margin-top: 15px;
+  float: right;
+}
+
+.reaction.image
+{
+  float: left;
+  padding-bottom: 5px;
+}
+
+.reaction.image img
+{
+  height: 42px;
+}
+
+.reaction.accepted
+{
+  background-color: green;
+}
+
+.reaction.declined
+{
+  background-color: red;
 }
 
 div.commit
@@ -111,8 +136,38 @@ div.commit
   width: 880px;
   margin: auto;
   background-color: #F0F3F7;
+
   padding: 10px;
-  border: 1px solid #BEDCE7;
+}
+
+div.commit.group_accepted
+{
+  border-left: 3px solid green;
+}
+
+div.commit.group_declined
+{
+  border-left: 3px solid red;
+}
+
+div.commit.group_need_review
+{
+  border-left: 3px solid #ffcc00;
+}
+
+div.commit.user_accepted
+{
+  border-right: 3px solid green;
+}
+
+div.commit.user_declined
+{
+  border-right: 3px solid red;
+}
+
+div.commit.user_need_review
+{
+  border-right: 3px solid #ffcc00;
 }
 
 
@@ -127,6 +182,7 @@ div.commit div.message
   padding-bottom: 5px;
   padding-top: 10px;
   clear: both;
+  float: left;
   font-size: 13px;
 }
 
@@ -200,3 +256,73 @@ a.update {
   font-size: 20px;
 }
 
+div.reactions {
+  background-color: #f3f3f3;
+  width: 100%;
+  border-top: 1px solid #AAA;
+  height: 55px;
+  clear: both;
+}
+
+div.reactions .reviewers {
+  float: left;
+  margin: 5px;
+  margin-left: 60px;
+}
+
+.reaction {
+  float: left;
+  margin-left: 5px;
+}
+
+div.reaction_form {
+  float: right;
+}
+
+div.reaction_form input.accept
+{
+  background-color: green;
+}
+
+
+div.reaction_form input.decline
+{
+  background-color: red;
+}
+
+div.reaction_form input.accept:hover
+{
+  background: #005500;
+  text-shadow: 1px 0px 0 white;
+  color: white;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+div.reaction_form input.decline:hover
+{
+  background: #880000;
+  text-shadow: 1px 0px 0 white;
+  color: white;
+  text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+div.reaction_form .submit
+{
+  float: left;
+  height: 36px;
+  
+  border: 1px solid #dddddd;
+  
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 3px 10px 3px 10px;
+  margin: 10px;
+  
+  line-height: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: verdana;
+}

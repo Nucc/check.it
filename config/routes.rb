@@ -57,6 +57,8 @@ Reviewer::Application.routes.draw do
     resources :patches, :constraints => { :id => %r([^/;,?]+) }
   end
 
+  resources :reactions
+
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

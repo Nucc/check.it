@@ -76,6 +76,21 @@ module PatchesHelper
     return actual_comments
   end
   
+  def reaction_balance(reactions)
+    accepted = reactions.select{|i| i.accepted?}.count
+    declined = reactions.select{|i| i.declined?}.count
+    return "group_need_review" if (reactions.size == 0)
+    return "group_accepted"    if (accepted - declined > 0 )
+    return "group_declined"    if (accepted - declined <= 0 and reactions.size > 0)
+  end
+  
+  def user_review_balance?(user, reactions)
+    reaction = reactions.select{|i| i.user_id == user.id}
+    return "user_need_review" if reaction.empty?
+    return "user_accepted"    if reaction[0].accepted?
+    return "user_declined"    if reaction[0].declined?
+  end
+  
   def by_day(all)
     dates = []
     last_day = nil

@@ -51,4 +51,21 @@
   </div>
 <% end %>
 
+<div class="reactions">
+  <div class="reviewers">
+    <%= render :partial => "reactions/reaction", :collection => @patch.reactions %>
+  </div>
+  <%- if @user.email != @patch.author_email %>
+  <div class="reaction_form">
+    <%- form_for @reaction, :remote => true do |f| -%>
+      <%= f.hidden_field :commit_diff_id %>
+      <%= f.submit "Accept", :class => "accept submit"%>
+      <%= f.submit "Decline", :class => "decline submit"%>
+    <%- end %>
+  </div>
+  <%- end %>
+  <div style="clear: both"></div>
+</div>
+
+
 </div>

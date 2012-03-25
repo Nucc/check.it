@@ -1,0 +1,9 @@
+<%- if reaction.accepted? %>
+  <div class="reaction accepted image">
+    <%= image_tag avatar(reaction.user.email), :title => reaction.user.username  %>
+  </div>
+<%- else %>
+  <div class="reaction declined image">
+    <%= image_tag avatar(reaction.user.email), :title => reaction.user.username %>
+  </div>
+<%- end %>

@@ -2,6 +2,7 @@ class CommitDiff < ActiveRecord::Base
 
   has_many :commits
   has_many :comments
+  has_many :reactions
   validate :sha, :uniqueness => true
 
 

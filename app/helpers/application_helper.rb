@@ -24,11 +24,15 @@ module ApplicationHelper
     
     message = ""
     if (notify.topic == Notify::PATCH)
-      message = "commented your patch."
+      message = "commented your patch"
     elsif (notify.topic == Notify::COMMENT )
-      message = "also commented on your reply."
+      message = "also commented on your reply"
+    elsif (notify.topic == Notify::ACCEPTED )
+      message = "accepted your patch"
+    elsif (notify.topic == Notify::DECLINED )
+      message = "declined your patch"
     end
     
-    return "#{name} #{message}"
+    return link_to "#{name} #{message}", notify_url(notify)
   end
 end

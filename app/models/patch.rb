@@ -93,6 +93,13 @@ class Patch
     []
   end
   
+  def reactions
+    return commit.reactions if commit
+    return CommitDiff.find_by_sha(self.diff_sha).reactions
+  rescue
+    []
+  end
+  
   def diff
     diff = String.new
     
