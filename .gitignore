@@ -5,3 +5,5 @@ tmp/**/*
 db/schema.rb
 config/database.yml
 test/**/*
+.gems/**/*
+.bundle/config

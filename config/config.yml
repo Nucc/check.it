@@ -7,5 +7,5 @@ test:
   sender_email: review@email.me
 
 development:
-  repository_path: <%= ::Rails.root %>/test/fixtures/repositories
+  repository_path: <%= ::Rails.root %>/repositories
   sender_email: review@email.me
