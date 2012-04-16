@@ -7,3 +7,4 @@ config/database.yml
 test/**/*
 .gems/**/*
 .bundle/config
+repositories/**
