@@ -33,7 +33,7 @@ protected
   end
 
   def fetch_origin
-    ::Grit::Git.git_timeout = 60
+    ::Grit::Git.git_timeout = 600
     plain_repository.fetch
     plain_repository.remote({}, "prune", "origin")
   end
