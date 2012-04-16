@@ -29,7 +29,7 @@
                                          new_comment_path(:block => block.number, :line => i),
                                          :remote => true if line.plus? %></td>
 
-          <td class="line"><%= link_to format_line(line.content).html_safe, 
+          <td class="line"><%= link_to format_line(line.content).html_safe,
                                        new_comment_path(:block => block.number, :line => i),
                                        :remote => true %></td>
         </tr>
@@ -53,7 +53,7 @@
 
 <div class="reactions">
   <div class="reviewers">
-    <%= render :partial => "reactions/reaction", :collection => @patch.reactions %>
+    <%= render :partial => "reactions/reaction", :collection => @reactions %>
   </div>
   <%- if @user.email != @patch.author_email %>
   <div class="reaction_form">

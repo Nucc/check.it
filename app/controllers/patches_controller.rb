@@ -24,11 +24,11 @@ class PatchesController < ApplicationController
     commit = CommitDiff.find_by_sha(@patch.diff_sha)
     
     @reaction = Reaction.new
-    @reaction.commit_diff_id = commit.id
-    
+
     if commit
+      @reaction.commit_diff_id = commit.id
       @comments  = commit.comments
-      @reactions = commit.reactions 
+      @reactions = commit.reactions
     else
       @comments  = []
       @reactions = []

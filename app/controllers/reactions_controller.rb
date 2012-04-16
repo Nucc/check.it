@@ -20,9 +20,17 @@ class ReactionsController < ApplicationController
   end
 
   def create
-    commit_diff = CommitDiff.find(params[:reaction][:commit_diff_id])
+
+    commit_diff_id = params[:reaction][:commit_diff_id].to_i
+
+    if commit_diff_id > 0
+      commit_diff = CommitDiff.find(commit_diff_id)
+    else
+      render :text => "Please update the repository, because patch is missing..."
+      return
+    end
     
-    @reaction = Reaction.find_by_user_id(@user.id) || Reaction.new
+    @reaction = Reaction.find_by_user_id_and_commit_diff_id(@user.id, commit_diff_id) || Reaction.new
     
     if commit_diff
       @reaction.commit_diff = commit_diff

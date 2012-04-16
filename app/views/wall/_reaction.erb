@@ -1,0 +1,34 @@
+<div class="commit_entry">
+  
+  <div class="image">
+    <%= image_tag avatar(reaction.user.email) %>
+  </div>
+  
+  <div class="content">
+    
+    <span class="message">
+      <span class="name">
+      <% patch =  reaction.commits[0].patch %>
+      <% branch = reaction.commits[0].branch %>
+      
+
+      <%= "#{reaction.user.username}" %>
+      <%- if reaction.accepted? %>
+        accepted
+      <%- else %>
+        declined
+      <%- end %>
+            
+      the following patch on <%= link_to "#{branch.repository}/#{branch.name}", repository_branch_patches_url(branch.repository, branch.name)%></span><br/><br/>
+      <%= refer_to patch %><br/>
+      
+    </span>
+    <div class="clear"></div>
+      
+    <span class="date">
+      <%= patch.date.strftime("%Y-%m-%d, %H:%M:%S") %>
+    </span>
+  </div>
+  
+<div class="clear"></div>
+</div>
