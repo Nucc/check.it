@@ -11,9 +11,9 @@ class CreateCommitDiffs < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :commit_diffs
-    remove_column :commits, :commit_diff_id
-    remove_index :comments, :sha
+    remove_index :commits, :sha
     remove_index :commit_diffs, :sha
+    remove_column :commits, :commit_diff_id
+    drop_table :commit_diffs
   end
 end
