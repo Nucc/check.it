@@ -1,4 +1,11 @@
 
+
+The Code Review Tool
+==============================
+
+Check.it is a simple code review tool for Git focusing on easy usage.
+
+
 How to install
 ==============
 
