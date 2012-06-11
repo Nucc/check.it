@@ -73,7 +73,10 @@ protected
     commit.created_at = head.date
     commit.branch = branch
     commit.save!
-    return add_the_new_patches(head.parent, branch)
+
+    head.parents.each do |parent|
+      add_the_new_patches(parent, branch)
+    end
   rescue NoPatch, ActiveRecord::RecordNotUnique
     return
   end

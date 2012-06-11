@@ -73,7 +73,15 @@ class Patch
     return Patch.new(repository, @etalon.parents[0]) unless @etalon.parents[0].nil?
     raise NoPatch
   end
-  
+
+  def parents
+    parents = []
+    @etalon.parents.each do |parent|
+      parents << Patch.new(repository, parent)
+    end
+    parents
+  end
+
   def tree
     @etalon.tree.id
   end
