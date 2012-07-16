@@ -4,8 +4,8 @@ Reviewer::Application.routes.draw do
   resources :comments
 
   resources :patches
-  
-  resources :notifies
+
+  resources :notifications
 
   resources :reactions
 

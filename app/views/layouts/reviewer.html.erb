@@ -18,12 +18,12 @@
       </div>
       <div class="text"><a href="/">check.it</a></div>
     </div>
-    
-    <li>Messages (<%= @notifies.length %>)
+
+    <li>Messages (<%= @notifications.length %>)
       <ul>
-        <% if @notifies.length > 0 %>
-          <%- @notifies.each do |notify| %>
-            <li><%= link_to format_notify(notify), notify_url(notify) %></li>
+        <% if @notifications.length > 0 %>
+          <%- @notifications.each do |notification| %>
+            <li><%= link_to format_notification(notification), notification_url(notification) %></li>
           <%- end %>
         <% else %>
           <li>No messages.</li>

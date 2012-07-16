@@ -19,20 +19,20 @@ module ApplicationHelper
     link_to(patch, repository_patch_url(patch.repository, patch))
   end
 
-  def format_notify(notify)
-    name = notify.comment.user.username
-    
+  def format_notification(notification)
+    name = notification.comment.user.username
+
     message = ""
-    if (notify.topic == Notify::PATCH)
+    if (notification.topic == Notification::PATCH)
       message = "commented your patch"
-    elsif (notify.topic == Notify::COMMENT )
+    elsif (notification.topic == Notification::COMMENT )
       message = "also commented on your reply"
-    elsif (notify.topic == Notify::ACCEPTED )
+    elsif (notification.topic == Notification::ACCEPTED )
       message = "accepted your patch"
-    elsif (notify.topic == Notify::DECLINED )
+    elsif (notification.topic == Notification::DECLINED )
       message = "declined your patch"
     end
-    
-    return link_to "#{name} #{message}", notify_url(notify)
+
+    return link_to "#{name} #{message}", notification_url(notification)
   end
 end

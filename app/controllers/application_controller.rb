@@ -35,7 +35,7 @@ protected
   
   def set_notify_messages
     return unless current_user
-    @notifies = Notify.where(["user_id = ? and status = ?", current_user.id, Notify::UNREAD]).all
+    @notifications = Notification.where(["user_id = ? and status = ?", current_user.id, Notification::UNREAD]).all
   end
 
 private

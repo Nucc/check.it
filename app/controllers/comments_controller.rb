@@ -59,8 +59,8 @@ class CommentsController < ApplicationController
 
     respond_to do |wants|
       if @comment.save
-        create_notify(params[:comment])
-        
+        create_notification(params[:comment])
+
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
         wants.xml  { render :xml => @comment, :status => :created, :location => @comment }
@@ -100,8 +100,8 @@ private
   def find_comment
     @comment = Comment.find(params[:id])
   end
-  
-  def create_notify(comment)
+
+  def create_notification(comment)
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(comment[:commit_sha])
     
@@ -112,7 +112,7 @@ private
     # notify the author
     author =  User.find_by_email(patch.author_email)
     if author and author.email != @user.email
-      send_notification(Notify::PATCH, author)
+      send_notification(Notification::PATCH, author)
     end
 
 
@@ -124,20 +124,20 @@ private
 
     comments.each do |comment|
       if not commenters.include?(comment.user.email)
-        commenters << comment.user.email        
-        send_notification(Notify::COMMENT, comment.user)
+        commenters << comment.user.email
+        send_notification(Notification::COMMENT, comment.user)
       end
     end
   end
 
   def send_notification(topic, to_user)
-    notify = Notify.new
-    notify.topic = topic
-    notify.status = Notify::UNREAD
-    notify.repository_id = session[:repository_id]
-    notify.user = to_user
-    notify.comment = @comment
-    notify.save!
+    notification = Notification.new
+    notification.topic = topic
+    notification.status = Notification::UNREAD
+    notification.repository_id = session[:repository_id]
+    notification.user = to_user
+    notification.comment = @comment
+    notification.save!
   end
-  
+
 end

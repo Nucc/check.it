@@ -1,4 +1,4 @@
-class Notify < ActiveRecord::Base
+class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :comment
 
@@ -6,7 +6,7 @@ class Notify < ActiveRecord::Base
   COMMENT = 2
   ACCEPT = 3
   DECLINED = 4
-  
+
   READ = 1
   UNREAD = 2
 
