@@ -1,28 +1,31 @@
 class NotificationsController < ApplicationController
 
- layout "reviewer"
+  layout "reviewer"
+
+  PER_PAGE = 100
 
   def index
-    @all_notification = Notification.find_all_by_user_id(@user.id, :order=> "created_at desc")
+    count = Notification.find_all_by_user_id(@user.id).count
+    @pager = ::Paginator.new(count, PER_PAGE) do |offset, per_page|
+      Notification.order("created_at DESC").by_user(@user.id).offset(offset).limit(per_page)
+    end
+    @all_notification = @pager.page(params[:page])
   end
 
   def show
     notification = Notification.find(params[:id])
 
-    commit    = notification.comment.commit
+    commit = notification.comment.commit
     return redirect_to("/") unless commit
 
-    patch_sha = commit.sha
+    set_read_all_same_notifications_of (commit)
+    jump_to (commit)
+  end
 
-    @patch = nil
-    @repo  = nil
 
-    Repository.all.each do |repo|
-      @repo  = repo
-      @patch = repo.patch(patch_sha)
-      break if @patch
-    end
+private
 
+  def set_read_all_same_notifications_of (commit)
     commit.comments.each do |comment|
       notification = comment.notification
 
@@ -32,8 +35,21 @@ class NotificationsController < ApplicationController
         notification.save!
       end
     end
-
-    redirect_to repository_patch_url(@repo, @patch)
   end
 
+  def jump_to (commit)
+    repository, patch = nil
+
+    Repository.all.each do |repo|
+      repository  = repo
+      patch = repo.patch(commit.sha)
+      break if patch
+    end
+
+    if (repository and patch)
+      redirect_to repository_patch_url(repository, patch)
+    else
+      redirect_to "/"
+    end
+  end
 end
