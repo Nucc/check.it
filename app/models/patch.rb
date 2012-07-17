@@ -110,14 +110,10 @@ class Patch
   
   def diff
     diff = String.new
-    
-    return [] if parent.nil?
-    
     # We should use the d self
-    @etalon.repo.diff(parent.sha, sha).each do |d|
+    @etalon.diffs.each do |d|
       diff += d.diff + "\n"
     end
-    
     blocks = []
     
     block  = Block.new
