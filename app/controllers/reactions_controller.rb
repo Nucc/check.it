@@ -8,11 +8,11 @@ class ReactionsController < ApplicationController
   def index
     render :text => ""
   end
-  
+
   def show
     commit = Commit.find_by_sha(params[:id])
-    
-    if commit    
+
+    if commit
       @reactions = commit.reactions
     else
       render :text => ""
@@ -29,9 +29,9 @@ class ReactionsController < ApplicationController
       render :text => "Please update the repository, because patch is missing..."
       return
     end
-    
+
     @reaction = Reaction.find_by_user_id_and_commit_diff_id(@user.id, commit_diff_id) || Reaction.new
-    
+
     if commit_diff
       @reaction.commit_diff = commit_diff
       @reaction.user = @user
@@ -40,16 +40,16 @@ class ReactionsController < ApplicationController
       render :text => ""
       return
     end
-    
+
     # start rendering
-    
+
     params[:id] = session[:patch_id]
     show
-    
+
     respond_to do |wants|
       if @reaction.save
         #create_notification(@reaction)
-        
+
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
       else
@@ -69,7 +69,7 @@ private
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(session[:patch_id])
     author =  User.find_by_email(patch.author_email)
-    
+
     if author
       if reaction.accepted?
         send_notification(Notify::ACCEPT, author)

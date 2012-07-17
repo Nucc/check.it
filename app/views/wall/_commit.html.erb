@@ -1,26 +1,26 @@
 <div class="commit_entry">
-  
+
   <div class="image">
     <%= image_tag avatar(commit.patch.author_email) %>
   </div>
-  
+
   <div class="content">
-    
+
     <span class="message">
       <span class="name">
       <% patch = commit.patch %>
       <% branch = commit.branch %>
-      
+
       <%= "#{patch.author_name}" %> added patch to <%= link_to "#{branch.repository}/#{branch.name}", repository_branch_patches_url(branch.repository, branch.name)%></span><br/><br/>
       <%= refer_to patch %><br/>
       <%= change_endlines(description(patch)) %>
     </span>
     <div class="clear"></div>
-      
+
     <span class="date">
       <%= patch.date.strftime("%Y-%m-%d, %H:%M:%S") %>
     </span>
   </div>
-  
+
 <div class="clear"></div>
 </div>

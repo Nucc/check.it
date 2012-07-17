@@ -3,8 +3,8 @@ class Reaction < ActiveRecord::Base
   belongs_to :commit_diff
   belongs_to :user
   has_many :commits, :through => :commit_diff
-    
-  
+
+
   def status=(value)
     if value == "Accept"
       self[:status] = true
@@ -20,10 +20,10 @@ class Reaction < ActiveRecord::Base
   def declined?
     self[:status] == 0
   end
-  
+
 protected
 
   def status
   end
-  
+
 end

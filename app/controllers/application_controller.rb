@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   before_filter :set_notify_messages
 
 protected
-  
+
   def set_title
     @page_title = title
   end
-  
+
   def title
     @page_title || ""
   end
@@ -19,7 +19,7 @@ protected
   def should_have_repository
     set_environment(:repository_id)
   end
-  
+
   def should_have_patchid
     set_environment(:patch_id)
   end
@@ -28,11 +28,11 @@ protected
     session[:branch_id] ||= "master"
     set_environment(:branch_id)
   end
-  
+
   def set_user
     @user = current_user
   end
-  
+
   def set_notify_messages
     return unless current_user
     @notifications = Notification.by_user(current_user.id).status(Notification::UNREAD).all

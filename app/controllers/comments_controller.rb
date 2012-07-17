@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :should_have_repository
   before_filter :should_have_patchid, :except => [:index]
-    
+
   # GET /comments
   # GET /comments.xml
   def index
@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.xml
   def new
-    
+
     @comment = Comment.new
     @comment.commit_sha = session[:patch_id]
     @comment.block = params[:block]
@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
       wants.js { render "new.html", :layout => false }
       wants.xml  { render :xml => @comment }
     end
-    
+
   end
 
   # GET /comments/1/edit
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   def create
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(params[:comment][:commit_sha])
-    
+
     @comment = Comment.new(params[:comment])
     @comment.commit_diff = CommitDiff.create_or_find(patch)
     @comment.user = @user
@@ -104,7 +104,7 @@ private
   def create_notification(comment)
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(comment[:commit_sha])
-    
+
     commenters = Array.new
     commenters << @user.email
     commenters << patch.author_email

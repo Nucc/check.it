@@ -12,16 +12,16 @@ class UpdateController < ApplicationController
       index_patches
       @response = Response.new :result => :success
     rescue Exception => e
-      @response = Response.new :result => :error, :message => e.to_s  
+      @response = Response.new :result => :error, :message => e.to_s
     end
     render_response
   end
-  
+
 protected
 
   def repository_must_be_defined
     unless params[:repository_id]
-      redirect_to "/"  
+      redirect_to "/"
     end
   end
 
@@ -39,24 +39,24 @@ protected
   end
 
   def update_references
-    
+
     # Remove all the references first
     Repository.new(repository).branches(:show => :only_names).each do |branch|
       plain_repository.update_ref({"d" => true}, "refs/heads/#{branch}") unless branch == "master"
     end
-    
-    # Set the branches using the origin remote 
+
+    # Set the branches using the origin remote
     Grit::Repo.new(repository).remotes.each do |remote|
       if remote.name.match(/^origin/)
         branch = remote.name.split("origin/")[1]
-        
+
         if not branch.include?("/") and branch != "HEAD"
           plain_repository.update_ref({}, "refs/heads/#{branch}", "origin/#{branch}")
         end
       end
     end
   end
-  
+
   def index_patches
     Repository.all.each do |repo|
       repo.branches.each do |branch|
@@ -65,7 +65,7 @@ protected
       end
     end
   end
-  
+
   def add_the_new_patches(head, branch)
     commit = Commit.new
     commit.patch = head
@@ -80,12 +80,12 @@ protected
   rescue NoPatch, ActiveRecord::RecordNotUnique
     return
   end
-  
+
 
   def plain_repository
     @plain_repository ||= ::Grit::Git.new("#{repository}/.git")
   end
-  
+
   def repository
     "#{CONFIG["repository_path"]}/#{params[:repository_id]}"
   end
@@ -97,5 +97,5 @@ protected
       format.json { render :json => @response.to_json }
     end
   end
-  
+
 end

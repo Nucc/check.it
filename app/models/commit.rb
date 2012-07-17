@@ -5,7 +5,7 @@ class Commit < ActiveRecord::Base
   validate   :sha, :uniqueness => true
   has_many   :comments,  :through => :commit_diff
   has_many   :reactions, :through => :commit_diff
-    
+
   def patch=(patch)
     self.sha = patch.sha
   end

@@ -15,12 +15,12 @@
         <td class="number">...</td>
         <td class="line"><%= block.size_info %></td>
       </tr>
-  
+
       <%- i = 0 -%>
       <% block.lines.each do |line| %>
         <%- i += 1 -%>
         <%- comments = get_comments(@comments, block.number, i) -%>
-    
+
         <tr class="<%= class_name(line, comments.length) %>">
           <td class="number"><%= link_to line.minus,
                                          new_comment_path(:block => block.number, :line => i),
@@ -40,12 +40,12 @@
               <div class="comments">
                 <%- comments.each do |comment| %>
                   <%= render "comments/comment", :comment => comment %>
-                <%- end %>   
+                <%- end %>
               </div>
               <div class="reply">
               </div>
             </td>
-          </tr>    
+          </tr>
       <%- end %>
     </table>
   </div>

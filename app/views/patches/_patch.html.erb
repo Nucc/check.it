@@ -2,20 +2,20 @@
 <%- reactions = patch.reactions %>
 
 <div class="commit <%= reaction_balance(reactions) %> <%= user_review_balance?(@user, reactions) if @user.email != patch.author_email%>">
-  <div class="description"> 
+  <div class="description">
     <div class="profile_image"><%= image_tag avatar(patch.author_email) %></div>
 
     <div class="author">
       <strong><%= patch.author_name %></strong> &lt;<%= patch.author_email%>&gt;
     </div>
-    
+
     <div class="date"><%= format_date(patch.date) %></div>
-    
+
     <%- if patch.comments.length > 0 %>
     <div class="comments"><%= pluralize(patch.comments.length, "comment") %></div>
     <%- end %>
   </div>
-  
+
   <div class="info">
     <div class="sha">
       Commit <span><%= format_patch(patch)%></span>
@@ -31,9 +31,9 @@
 
     <div class="tree">
        Tree &nbsp;&nbsp;<span><%= patch.tree %></span>
-   </div>      
+   </div>
   </div>
-  
+
   <div class="message">
    <%- if show_long_message %>
       <div class="message"><%= simple_format(patch.message) %></div>
@@ -47,9 +47,9 @@
     <%= render :partial => "reactions/reaction", :collection => patch.reactions %>
   </span>
   <%- end -%>
-  
-  <div style="clear: both"></div>  
-  
+
+  <div style="clear: both"></div>
+
   <%- if patch.tags.size > 0 -%>
    <span class="tags">
      <%- patch.tags.each do |tag| %>
@@ -57,7 +57,7 @@
      <%- end %>
    </span>
    <%- end -%>
-   
-   
-   <div style="clear: both"></div>  
+
+
+   <div style="clear: both"></div>
 </div>

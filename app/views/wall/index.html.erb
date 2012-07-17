@@ -1,18 +1,18 @@
 <div class="wall">
-  
-  
-  
+
+
+
   <div class="commits">
     <%- date = "" %>
     <%- @entries.each do |entry| %>
-    
+
       <%- d = entry.created_at.to_s.split(" ")[0] %>
       <%- if date != d %>
         <div class="date"><%= d %></div>
         <%- date = d %>
       <%- end %>
-    
-    
+
+
       <%- if entry.class.name    == "Commit" %>
         <%= render :partial => "commit", :object => entry %>
       <%- elsif entry.class.name == "Comment" %>
@@ -20,7 +20,7 @@
       <%- elsif entry.class.name == "Reaction" %>
         <%= render :partial => "reaction", :object => entry %>
       <%- end %>
-      
+
     <%- end %>
   </div>
 
@@ -29,7 +29,7 @@
       <%= render :partial => "repository", :object => repo %>
     <%- end %>
   </div>
-  
+
   <div class="clear"></div>
-  
+
 </div>

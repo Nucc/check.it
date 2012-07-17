@@ -1,19 +1,19 @@
 
 class Line
-  
+
   PLUS              = 1
   MINUS             = 2
   NOCHANGE          = 3
-  
+
   include ActiveModel::AttributeMethods
   extend ActiveModel::Naming
-  
+
   attr_reader   :plus
   attr_reader   :minus
   attr_reader   :content
   attr_reader   :type
   attr_accessor :num
-  
+
   def initialize(plain_line)
     if plain_line.match /^\+/
       @type    = PLUS
@@ -42,10 +42,10 @@ class Line
       @plus  = plus
       @minus = minus
     end
-    
+
     return [plus, minus]
   end
-  
+
   def minus?
     @type != PLUS
   end
@@ -54,7 +54,7 @@ class Line
     @type != MINUS
   end
 
-  
+
   def content
     @content || ""
   end

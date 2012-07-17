@@ -1,27 +1,27 @@
 <div class="commit_entry">
-  
+
   <div class="image">
     <%= image_tag avatar(comment.user.email) %>
   </div>
-  
+
   <div class="content">
-    
+
     <span class="message">
       <% commit = comment.commits[0] %>
       <% patch  = commit.patch %>
-      
-      <span class="name"><%= "#{comment.user.username}" %> commented 
+
+      <span class="name"><%= "#{comment.user.username}" %> commented
       <%= link_to commit.sha.first(8), repository_patch_url(commit.branch.repository, commit.sha) %> on
       <%= link_to "#{commit.branch.repository}/#{commit.branch.name}", repository_branch_patches_url(commit.branch.repository, commit.branch.name)%>
 </span><br/><br/>
       <%= comment.opinion %>
     </span>
     <div class="clear"></div>
-      
+
     <span class="date">
       <%= comment.created_at.strftime("%Y-%m-%d, %H:%M:%S") %>
     </span>
   </div>
-  
+
 <div class="clear"></div>
 </div>

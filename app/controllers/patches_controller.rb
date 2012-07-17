@@ -17,12 +17,12 @@ class PatchesController < ApplicationController
     session[:repository_id] = params[:repository_id]
     session[:branch_id] = params[:branch_id] || "master"
   end
-  
-  def show    
+
+  def show
     @patch = repository.patch(params[:id])
 
     commit = CommitDiff.find_by_sha(@patch.diff_sha)
-    
+
     @reaction = Reaction.new
 
     if commit
@@ -33,7 +33,7 @@ class PatchesController < ApplicationController
       @comments  = []
       @reactions = []
     end
-    
+
     session[:patch_id] = params[:id]
   end
 
@@ -49,7 +49,7 @@ private
 
   def branch
     (params[:branch_id] || "master").to_s
-  end  
+  end
 
   def use_patch_id_instead_of_id
     # FIXME: It isn't so nice, so try to find a solution to bind :id to :patch_id somehow
