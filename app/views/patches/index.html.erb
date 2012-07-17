@@ -13,16 +13,4 @@
 <%- end %>
 
 
-<div id="paginator">
-<%= link_to("<<<", repository_branch_patches_url(@repository, @repository.branch, :page => @patches.prev.number)) if @patches.prev? %>
-
-<% @pager.each do |page| %>
-  <% if page.number != @patches.number %>
-    <%= link_to(page.number, repository_branch_patches_url(@repository, @repository.branch, :page => page.number)) %>
-  <% else %>
-    <span class="current"><%= @patches.number %></span>
-  <% end %>
-<% end %>
-
-<%= link_to(">>>", repository_branch_patches_url(@repository, @repository.branch, :page => @patches.next.number)) if @patches.next? %>
-</div>
+<%= paginator(@patches, @pager, :repository_branch_patches_url, @repository, @repository.branch) %>
