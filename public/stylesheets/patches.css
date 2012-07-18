@@ -15,6 +15,11 @@ div.patch .filename
   border-bottom: 1px solid #BBB;
 }
 
+div.patch .lines
+{
+  overflow-x: auto;
+}
+
 div.patches
 {
   margin-bottom: 30px;
