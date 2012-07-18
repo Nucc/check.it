@@ -52,8 +52,21 @@ tr.plus
 tr.commented td
 {
   background-color: yellow;
+  border-bottom: 3px solid gray;
+}
+
+tr.minus.commented td
+{
+  background-color: yellow;
   border-bottom: 3px solid red;
 }
+
+tr.plus.commented td
+{
+  background-color: yellow;
+  border-bottom: 3px solid green;
+}
+
 
 tr.info
 {
