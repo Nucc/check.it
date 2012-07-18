@@ -6,3 +6,11 @@ require 'rake'
 
 Reviewer::Application.load_tasks
 task :test => :spec
+
+task :send_notifications => :environment do
+
+	Notification.unread.grouped_by_user.each do |notification|
+		NotificationMailer.send_unread_notifications(notification.user).deliver
+	end
+
+end

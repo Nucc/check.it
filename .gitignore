@@ -8,3 +8,4 @@ test/**/*
 .gems/**/*
 .bundle/config
 repositories/**
+config/config.yml

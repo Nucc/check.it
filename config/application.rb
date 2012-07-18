@@ -38,5 +38,15 @@ module Reviewer
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # config.action_mailer.delivery_method = :sendmail
+
+    # ActionMailer::Base.smtp_settings = {
+    #   :address  => "smtp.someserver.net",
+    #   :port  => 25,
+    #   :user_name  => "someone@someserver.net",
+    #   :password  => "mypass",
+    #   :authentication  => :login
+    # }
   end
 end
