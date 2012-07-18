@@ -19,6 +19,12 @@ div.comments div.comment
   min-height: 24px;
 }
 
+div.comments div.comment span.date
+{
+  float: right;
+  font-size: 11px;
+}
+
 div.user
 {
   width: 150px;

@@ -2,6 +2,7 @@
 
 <div class="comment">
   <%= simple_format comment.opinion %>
+  <span class="date"><%= human_time comment.created_at %></span>
 </div>
 
 <div style="clear: both"></div>
