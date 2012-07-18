@@ -31,6 +31,7 @@ table.diff
 {
   background-color: #F4F4F4;
   border-spacing: 0px;
+  white-space:nowrap;
 }
 
 td
