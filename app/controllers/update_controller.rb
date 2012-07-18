@@ -4,6 +4,7 @@ class UpdateController < ApplicationController
 
   before_filter :repository_must_be_defined
   before_filter :repository_must_exists
+  before_filter :check_full_index
 
   def index
     begin
@@ -58,29 +59,38 @@ protected
   end
 
   def index_patches
-    Repository.all.each do |repo|
-      repo.branches.each do |branch|
-        branch_model = Branch.find_or_create_by_repository_and_name(repo.name, branch.repository.branch)
-        add_the_new_patches(branch, branch_model)
-      end
+    repo = Repository.by_name(params[:repository_id])
+    repo.branches.each do |branch|
+      branch_model = Branch.find_or_create_by_repository_and_name(repo.name, branch.repository.branch)
+      add_the_new_patches(branch, branch_model)
     end
   end
 
   def add_the_new_patches(head, branch)
-    commit = Commit.new
-    commit.patch = head
-    commit.commit_diff = CommitDiff.create_or_find(head)
-    commit.created_at = head.date
-    commit.branch = branch
-    commit.save!
+    create_commit(head, branch)
 
     head.parents.each do |parent|
       add_the_new_patches(parent, branch)
     end
-  rescue NoPatch, ActiveRecord::RecordNotUnique
+
+  rescue NoPatch
     return
+
+  rescue ActiveRecord::RecordNotUnique
+    return unless @need_full_index
+    head.parents.each do |parent|
+      add_the_new_patches(parent, branch)
+    end
   end
 
+  def create_commit(patch, branch)
+    commit = Commit.new
+    commit.patch = patch
+    commit.commit_diff = CommitDiff.create_or_find(patch)
+    commit.created_at = patch.date
+    commit.branch = branch
+    commit.save!
+  end
 
   def plain_repository
     @plain_repository ||= ::Grit::Git.new("#{repository}/.git")
@@ -96,6 +106,10 @@ protected
       format.xml  { render :xml => @response.to_xml }
       format.json { render :json => @response.to_json }
     end
+  end
+
+  def check_full_index
+    @need_full_index = params[:full_index]
   end
 
 end
