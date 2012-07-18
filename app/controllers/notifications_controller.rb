@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
   def index
     count = Notification.find_all_by_user_id(@user.id).count
     @pager = ::Paginator.new(count, PER_PAGE) do |offset, per_page|
-      Notification.order("created_at DESC").by_user(@user.id).offset(offset).limit(per_page)
+      Notification.order("created_at ASC").by_user(@user.id).offset(offset).limit(per_page)
     end
     @all_notification = @pager.page(params[:page])
   end
