@@ -15,6 +15,7 @@ class Commit < ActiveRecord::Base
       patch = repo.patch(self.sha)
       return patch if patch
     end
+    return nil
   end
 
 end
