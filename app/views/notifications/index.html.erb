@@ -1,15 +1,14 @@
 <div class="wall">
-	<% dates = order_by_date(@all_notification, :created) %>
-
-	<% dates.each do |date, notifications| %>
+  <% dates = order_by_date(@all_notification, :created) %>
+  <% dates.keys.reverse.each do |date| %>
+    <% notifications = dates[date] %>
     <div class="date"> <%= date %> </div>
-    <% notifications.each do |notification| %>
+    <% notifications.reverse.each do |notification| %>
       <ul>
-       <b><%= notification.created_at.hour %>:<%= "%02d" % notification.created_at.min %></b>
-       <%= format_notification notification %>
-     </ul>
-   <% end %>
- <% end %>
-
- <%= paginator(@all_notification, @pager, :notifications_url) %>
+        <b><%= notification.created_at.hour %>:<%= "%02d" % notification.created_at.min %></b>
+        <%= format_notification notification %>
+      </ul>
+    <% end %>
+  <% end %>
+  <%= paginator(@all_notification, @pager, :notifications_url) %>
 </div>
