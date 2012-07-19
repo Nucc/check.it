@@ -109,27 +109,23 @@ class Patch
   end
 
   def diff
+
     diff = String.new
-    # We should use the d self
-    @etalon.diffs.each do |d|
-      diff += d.diff + "\n"
-    end
     blocks = []
 
-    block  = Block.new
-    block.number = blocks.length
-    diff.lines.each do |line|
-      if block.parse(line)
-        next
-      else
-        blocks << block
-        block = Block.new
-        block.number = blocks.length
+    # We should use the d self
+    @etalon.diffs.each do |hunk|
+
+      block  = Block.new
+      block.number = blocks.length
+      block.filename = hunk.a_path
+      hunk.diff.lines.each do |line|
         block.parse(line)
       end
+
+      blocks << block
     end
-    block.number = blocks.length
-    blocks << block
+
     return blocks
   end
 

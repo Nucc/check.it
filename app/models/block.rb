@@ -4,7 +4,7 @@ class Block
 
   attr_accessor :number
   attr_reader   :lines
-  attr_reader   :filename
+  attr_accessor :filename
 
   attr_reader   :size_info
 
@@ -37,12 +37,6 @@ class Block
 
       @size_info = plain_line
       return true
-
-    elsif plain_line.match /^\+\+\+ [\w]{1}(.*)/
-      result = plain_line.match(/^\+\+\+ [\w]{1}(.*)/)
-      if result[1]
-        @filename = result[1].to_s.strip
-      end
     end
 
     if (@size_info)
