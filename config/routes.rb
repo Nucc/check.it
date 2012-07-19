@@ -51,12 +51,12 @@ Reviewer::Application.routes.draw do
 
   match "/repositories/:repository_id", :controller => :patches, :action => :index, :constraints => { :repository_id => %r([^/;,?]+) }
 
-  resources :repositories, :constraints => { :id => %r([^/;,?]+) } do
-    resources :branches, :constraints => { :id => %r([^/;,?]+) } do
-      resources :patches, :constraints => { :id => %r([^/;,?]+) }
+  resources :repositories, :constraints => { :id => %r([^;,?]+) } do
+    resources :branches, :constraints => { :id => %r([^;,?]+) } do
+      resources :patches, :constraints => { :id => %r([^;,?]+) }
     end
-    
-    resources :patches, :constraints => { :id => %r([^/;,?]+) }
+
+    resources :patches, :constraints => { :id => %r([^;,?]+) }
   end
 
   # Sample resource route within a namespace:

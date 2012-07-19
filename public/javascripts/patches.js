@@ -50,9 +50,9 @@ $(document).ready(function()
 
   $("#branch_id").live("change", function(event)
   {
-    window.location = $("#branch_" + event.target.value)[0].value;
+    window.location = event.target.value;
   });
-  
+
   $(".reaction_form form").live("ajax:complete", function(event, ui)
   {
     console.debug($(".reaction_form .reviewers"));

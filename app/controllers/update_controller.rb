@@ -51,7 +51,7 @@ protected
       if remote.name.match(/^origin/)
         branch = remote.name.split("origin/")[1]
 
-        if not branch.include?("/") and branch != "HEAD"
+        if branch != "HEAD"
           plain_repository.update_ref({}, "refs/heads/#{branch}", "origin/#{branch}")
         end
       end
