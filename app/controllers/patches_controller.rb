@@ -20,21 +20,11 @@ class PatchesController < ApplicationController
 
   def show
     @patch = repository.patch(params[:id])
-
-    commit = CommitDiff.find_by_sha(@patch.diff_sha)
-
     @reaction = Reaction.new
-
-    if commit
-      @reaction.commit_diff_id = commit.id
-      @comments  = commit.comments
-      @reactions = commit.reactions
-    else
-      @comments  = []
-      @reactions = []
-    end
-
     session[:patch_id] = params[:id]
+    commit_diff = CommitDiff.find_by_sha(@patch.diff_sha)
+
+    set_comments_and_reactions_using commit_diff
   end
 
 private
@@ -54,6 +44,17 @@ private
   def use_patch_id_instead_of_id
     # FIXME: It isn't so nice, so try to find a solution to bind :id to :patch_id somehow
     params[:patch_id] = params[:id]
+  end
+
+  def set_comments_and_reactions_using (commit_diff)
+    if commit_diff
+      @reaction.commit_diff_id = commit_diff.id
+      @comments  = commit_diff.comments
+      @reactions = commit_diff.reactions
+    else
+      @comments  = []
+      @reactions = []
+    end
   end
 
 end
