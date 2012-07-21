@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
 
     respond_to do |wants|
       if @comment.save
-        create_notification(params[:comment])
+        create_notifications(params[:comment])
 
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}
@@ -101,30 +101,41 @@ private
     @comment = Comment.find(params[:id])
   end
 
-  def create_notification(comment)
+  def create_notifications(comment)
     repo = Repository.by_name(session[:repository_id])
     patch = repo.patch(comment[:commit_sha])
+    comments = find_the_comments_according_to(patch.diff_sha, comment[:block], comment[:line])
 
-    commenters = Array.new
-    commenters << @user.email
-    commenters << patch.author_email
+    do_not_notify(@user.email)
+    notify_the_author(patch.author_email)
+    notify_the_commenters (comments)
+  end
 
-    # notify the author
-    author =  User.find_by_email(patch.author_email)
+  def notify_the_author(author_email)
+    author =  User.find_by_email(author_email)
+    @commenters << author_email
     if author and author.email != @user.email
       send_notification(Notification::PATCH, author)
     end
+  end
 
+  def find_the_comments_according_to(diff_sha, block, line)
+    diff_id = CommitDiff.find_by_sha(diff_sha)
+    Comment.includes([:user]).
+            where(['comments.commit_diff_id = ? and comments.block = ? and comments.line = ?',
+                  diff_id, block, line]).all
+  end
 
-    # notify the commenters
-    comments = Comment.includes([:user]).
-                       where(['comments.commit_diff_id = ? and comments.block = ? and comments.line = ?',
-                               patch.diff_sha, comment[:block], comment[:line]]
-                            ).all
+  def do_not_notify(mail)
+    @commenters ||= Array.new
+    @commenters << mail
+  end
 
+  def notify_the_commenters(comments)
+    @commenters ||= Array.new
     comments.each do |comment|
-      if not commenters.include?(comment.user.email)
-        commenters << comment.user.email
+      if not @commenters.include?(comment.user.email)
+        @commenters << comment.user.email
         send_notification(Notification::COMMENT, comment.user)
       end
     end
