@@ -61,7 +61,12 @@ Before launching, prepare your configuration file at <code>/config/config.yml</c
 cp config/config.yml.sample config/config.yml
 </pre>
 
-After all start the application:
+I suggest you to use Passenger tool with Apache or Nginx, or use Thin server and proxy all the request to it.
+
+ * http://www.modrails.com/
+ * http://code.macournoyer.com/thin/
+
+For developing I suggest you the embedded server that you can run by
 
 <pre>
 bundle exec rails server
