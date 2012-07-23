@@ -1,7 +1,5 @@
+<% cache do %>
 <div class="wall">
-
-
-
   <div class="commits">
     <%- date = "" %>
     <%- @entries.each do |entry| %>
@@ -11,7 +9,6 @@
         <div class="date"><%= d %></div>
         <%- date = d %>
       <%- end %>
-
 
       <%- if entry.class.name    == "Commit" %>
         <%= render :partial => "commit", :object => entry %>
@@ -23,13 +20,11 @@
 
     <%- end %>
   </div>
-
   <div class="repositories">
     <%- @repositories.each do |repo| %>
       <%= render :partial => "repository", :object => repo %>
     <%- end %>
   </div>
-
   <div class="clear"></div>
-
 </div>
+<% end %>

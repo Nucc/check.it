@@ -59,6 +59,7 @@ class CommentsController < ApplicationController
 
     respond_to do |wants|
       if @comment.save
+        expire_fullsite_caches
         create_notifications(params[:comment])
 
         wants.html { render :action => "show" }

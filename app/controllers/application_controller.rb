@@ -41,6 +41,23 @@ protected
     end
   end
 
+  def expire_fullsite_caches
+    expire_wall
+
+    # Remove all patches/index pages when full site caches needs
+    expire_fragment %r{patches-.*}
+  end
+
+  def expire_wall
+    expire_fragment :controller => :wall, :action => :index
+  end
+
+  def expire_repository(repository)
+    expire_wall
+
+    expire_fragment %r{patches-#{repository}-.*}
+  end
+
 private
 
   def set_environment(key)

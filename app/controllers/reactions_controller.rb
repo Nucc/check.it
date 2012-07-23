@@ -49,6 +49,7 @@ class ReactionsController < ApplicationController
     respond_to do |wants|
       if @reaction.save
         #create_notification(@reaction)
+        expire_fullsite_caches
 
         wants.html { render :action => "show" }
         wants.js   { render :action => "show", :layout => false}

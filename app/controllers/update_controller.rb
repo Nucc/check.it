@@ -15,6 +15,8 @@ class UpdateController < ApplicationController
     rescue Exception => e
       @response = Response.new :result => :error, :message => e.to_s
     end
+
+    expire_repository(params[:repository_id])
     render_response
   end
 

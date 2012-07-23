@@ -1,3 +1,5 @@
+<% cache "patches-#{@repository}-#{@repository.branch}-#{@patches.number}" do %>
+
 <%= link_to "Update the repository", {:controller => "update", :repository_id => @repository}, {:class => "update"} %>
 
 <%- by_day(@patches).each do |day| %>
@@ -14,3 +16,5 @@
 
 
 <%= paginator(@patches, @pager, :repository_branch_patches_url, @repository, @repository.branch) %>
+
+<% end %>
