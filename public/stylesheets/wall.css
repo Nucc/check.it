@@ -65,32 +65,45 @@ div.commit_entry .date {
   margin-top: 10px;
 }
 
-
-.repository {
-  margin: 5px;
-  font-size: 12px;
-  padding: 5px;
-  width: 280px;
-  margin: auto;
-
-  border-bottom: 1px solid #CCC;
-
+.repositories {
+  margin-left: 10px;
   float: left;
 }
 
-.repository .name {
-  background-color: #2B7ABA;
-  color: #FFF;
-  padding: 7px;
+.repository {
+  font-size: 12px;
+  width: 284px;
+  margin: auto;
+  margin-bottom: 15px;
 }
 
-.repository .branches {
+.repository .name {
+  margin: auto;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #777;
+  color: #FFF;
+  padding: 7px;
+  width: 275px;
+  font-weight: bold;
+}
 
+
+.repository .branches {
+  border-left: 1px solid #CCC;
+  border-right: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  width: 278px;
+  margin-left: 4px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .repository .branches li {
   margin-top: 5px;
-  margin-left: 20px;
+  margin-left: 10px;
+  color: #555;
+  list-style-type: square;
 }
 
 .repository .branches li a {

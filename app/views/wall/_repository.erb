@@ -2,7 +2,7 @@
   <div class="name"><%= repository.name %></div>
   <div class="branches">
   <%- repository.branches(:show => :only_names).each do |branch| %>
-    <li><%= link_to branch, repository_branch_patches_url(repository, branch) %></li>
+    <li><%= link_to truncate(branch, :length => 35), repository_branch_patches_url(repository, branch) %></li>
   <%- end %>
   </div>
 </div>
