@@ -36,6 +36,11 @@ table.diff
 {
   background-color: #F4F4F4;
   border-spacing: 0px;
+}
+
+table.diff.plus
+table.diff.minus
+{
   white-space:nowrap;
 }
 
