@@ -1,6 +1,6 @@
 <% cache "patches-#{@repository}-#{@repository.branch}-#{@patches.number}" do %>
 
-<%= link_to "Update the repository", {:controller => "update", :repository_id => @repository}, {:class => "update"} %>
+<%= link_to "Update the repository", {:controller => "update", :repository_id => @repository, :back_url => request.fullpath}, {:class => "update"} %>
 
 <%- by_day(@patches).each do |day| %>
 <div class="patches">

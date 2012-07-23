@@ -1,5 +1,9 @@
 <% if @response.result == "success" %>
   <h1>Repository has been updated!</h1>
+
+  <% if @back_url %>
+  	<%= link_to "Go back...", @back_url %>
+  <% end %>
 <% else %>
   <h1><%= @response.message %></h1>
 <% end %>

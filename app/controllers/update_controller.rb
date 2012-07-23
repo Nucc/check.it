@@ -103,6 +103,9 @@ protected
   end
 
   def render_response
+    @back_url = params[:back_url]
+    return redirect_to @back_url if params[:redirect]
+
     respond_to do |format|
       format.html { render :index }
       format.xml  { render :xml => @response.to_xml }
