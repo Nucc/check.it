@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_title
   before_filter :set_user
-  before_filter :set_notify_messages
+  before_filter :set_notification_messages
 
 protected
 
@@ -33,9 +33,12 @@ protected
     @user = current_user
   end
 
-  def set_notify_messages
-    return unless current_user
-    @notifications = Notification.by_user(current_user.id).status(Notification::UNREAD).all
+  def set_notification_messages
+    unless current_user
+      @notifications = []
+    else
+      @notifications = Notification.by_user(current_user.id).status(Notification::UNREAD).all
+    end
   end
 
 private
