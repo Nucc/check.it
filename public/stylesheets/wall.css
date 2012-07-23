@@ -88,6 +88,15 @@ div.commit_entry .date {
   font-weight: bold;
 }
 
+.repository .name .update {
+  float: right;
+  margin-top: -4px;
+}
+
+.repository .name .update img {
+  height: 24px;
+  border: 0px;
+}
 
 .repository .branches {
   border-left: 1px solid #CCC;

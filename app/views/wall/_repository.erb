@@ -1,5 +1,9 @@
 <div class="repository">
-  <div class="name"><%= repository.name %></div>
+  <div class="name"><%= repository.name %>
+  	<span class="update">
+  		<%= link_to image_tag("refresh.png"), :controller => :update, :repository_id => repository, :back_url => request.fullpath, :redirect => true %>
+  	</span>
+  </div>
   <div class="branches">
   <%- repository.branches(:show => :only_names).each do |branch| %>
     <li><%= link_to truncate(branch, :length => 35), repository_branch_patches_url(repository, branch) %></li>
