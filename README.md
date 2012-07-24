@@ -3,7 +3,7 @@
 The Code Review Tool
 ==============================
 
-Check.it is a simple code review tool for Git focusing on easy usage.
+Check.it is a simple code review tool for Git focusing on easy usage. You can find more information on http://nucc.github.com/check.it.
 
 
 How to install
