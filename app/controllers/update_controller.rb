@@ -16,7 +16,7 @@ class UpdateController < ApplicationController
       @response = Response.new :result => :error, :message => e.to_s
     end
 
-    expire_repository(params[:repository_id])
+    invalidate_cache_entries
     render_response
   end
 
@@ -75,6 +75,8 @@ protected
       add_the_new_patches(parent, branch)
     end
 
+    found_unknown_entry
+
   rescue NoPatch
     return
 
@@ -115,6 +117,16 @@ protected
 
   def check_full_index
     @need_full_index = params[:full_index]
+  end
+
+private
+
+  def found_unknown_entry
+    @expired = true
+  end
+
+  def invalidate_cache_entries
+    expire_repository(params[:repository_id]) if @expired
   end
 
 end

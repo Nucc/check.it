@@ -1,25 +1,27 @@
-<% cache do %>
 <div class="wall">
-  <div class="commits">
-    <%- date = "" %>
-    <%- @entries.each do |entry| %>
+  <% cache do %>
+    <div class="commits">
+      <%- date = "" %>
+      <%- @entries.each do |entry| %>
 
-      <%- d = entry.created_at.to_s.split(" ")[0] %>
-      <%- if date != d %>
-        <div class="date"><%= d %></div>
-        <%- date = d %>
+        <%- d = entry.created_at.to_s.split(" ")[0] %>
+        <%- if date != d %>
+          <div class="date"><%= d %></div>
+          <%- date = d %>
+        <%- end %>
+
+        <%- if entry.class.name    == "Commit" %>
+          <%= render :partial => "commit", :object => entry %>
+        <%- elsif entry.class.name == "Comment" %>
+          <%= render :partial => "comment", :object => entry %>
+        <%- elsif entry.class.name == "Reaction" %>
+          <%= render :partial => "reaction", :object => entry %>
+        <%- end %>
+
       <%- end %>
+    </div>
+  <% end %>
 
-      <%- if entry.class.name    == "Commit" %>
-        <%= render :partial => "commit", :object => entry %>
-      <%- elsif entry.class.name == "Comment" %>
-        <%= render :partial => "comment", :object => entry %>
-      <%- elsif entry.class.name == "Reaction" %>
-        <%= render :partial => "reaction", :object => entry %>
-      <%- end %>
-
-    <%- end %>
-  </div>
   <div class="repositories">
     <%- @repositories.each do |repo| %>
       <%= render :partial => "repository", :object => repo %>
@@ -27,4 +29,3 @@
   </div>
   <div class="clear"></div>
 </div>
-<% end %>
