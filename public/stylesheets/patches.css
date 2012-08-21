@@ -119,12 +119,13 @@ td.line a
   color: #333;
 }
 
-.tags
+.tag
 {
   background-color: yellow;
   padding: 3px;
   border: 1px solid #444;
   float: right;
+  margin: 3px;
 }
 
 .reviewed
