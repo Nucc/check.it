@@ -128,6 +128,7 @@ class Patch
           blocks << block
           block  = Block.new
           block.number = blocks.length
+          block.parse(line)
         end
       end
       blocks << block
