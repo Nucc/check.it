@@ -7,6 +7,7 @@ class UpdateController < ApplicationController
   before_filter :check_full_index
 
   def index
+    @expired = false
     begin
       fetch_origin
       update_references
@@ -76,6 +77,8 @@ protected
     end
 
     found_unknown_entry
+
+    @expired = true
 
   rescue NoPatch
     return
